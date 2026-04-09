@@ -276,7 +276,10 @@ export default function TemplateSelector({ design, data, onDesignChange }: Props
                 layout={layout}
                 index={i}
                 isSelected={layout.id === design.frontLayoutId}
-                onSelect={() => onDesignChange({ frontLayoutId: layout.id })}
+                onSelect={() => onDesignChange({
+                  frontLayoutId: layout.id,
+                  ...(!useBranding && layout.defaultPaletteId ? { paletteId: layout.defaultPaletteId } : {}),
+                })}
                 previewData={previewData}
                 previewPalette={userPalette}
                 titleFontOverride={useBranding ? design.titleFont : undefined}

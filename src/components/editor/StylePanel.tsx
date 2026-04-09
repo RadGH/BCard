@@ -96,7 +96,12 @@ export default function StylePanel({
                 <button onClick={() => handleApplySaved(saved)} className="flex items-center gap-2 flex-1 text-left min-w-0">
                   <div className="flex gap-1 shrink-0">
                     {([saved.palette.primary, saved.palette.secondary, saved.palette.background, saved.palette.accent] as string[]).map((color, i) => (
-                      <span key={i} className="w-3.5 h-3.5 rounded-full border border-black/10" style={{ backgroundColor: color }} />
+                      <span 
+                        key={i} 
+                        className="w-3.5 h-3.5 rounded-full border border-black/10" 
+                        style={{ backgroundColor: color }}
+                        aria-hidden="true"
+                      />
                     ))}
                   </div>
                   {renamingId === saved.id ? (
@@ -109,6 +114,7 @@ export default function StylePanel({
                       autoFocus
                       className="flex-1 text-sm border border-blue-400 rounded px-1 py-0.5 focus:outline-none"
                       onClick={e => e.stopPropagation()}
+                      aria-label={`Edit palette name for "${saved.name}"`}
                     />
                   ) : (
                     <span className="text-sm font-medium text-slate-700 truncate">{saved.name}</span>
@@ -165,7 +171,12 @@ export default function StylePanel({
             >
               <div className="flex gap-1 shrink-0">
                 {([palette.primary, palette.secondary, palette.background, palette.accent] as string[]).map((color, i) => (
-                  <span key={i} className="w-4 h-4 rounded-full border border-black/10" style={{ backgroundColor: color }} />
+                  <span 
+                    key={i} 
+                    className="w-4 h-4 rounded-full border border-black/10" 
+                    style={{ backgroundColor: color }}
+                    aria-hidden="true"
+                  />
                 ))}
               </div>
               <span className="text-sm font-medium text-slate-700">{palette.name}</span>
@@ -218,12 +229,14 @@ export default function StylePanel({
               <label key={key} className="flex items-center gap-3">
                 <input
                   type="color"
+                  id={`color-input-${key}`}
                   value={resolvedPalette[key]}
                   onChange={e => onCustomColorChange(key, e.target.value)}
                   className="w-10 h-10 rounded border border-slate-300 cursor-pointer shrink-0"
+                  aria-label={`${key.replace(/([A-Z])/g, ' $1').trim()} color: ${resolvedPalette[key]}`}
                 />
                 <span className="text-sm text-slate-600 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
-                <span className="ml-auto text-xs font-mono text-slate-400">{resolvedPalette[key]}</span>
+                <span className="ml-auto text-xs font-mono text-slate-600">{resolvedPalette[key]}</span>
               </label>
             ))}
           </div>
@@ -233,7 +246,7 @@ export default function StylePanel({
       {/* Icon Style */}
       <section>
         <h3 className="text-sm font-semibold text-slate-700 mb-2">Icon Style</h3>
-        <p className="text-xs text-slate-400 mb-2">Controls icons on social &amp; contact items</p>
+        <p className="text-xs text-slate-600 mb-2">Controls icons on social &amp; contact items</p>
         <div className="flex gap-2 flex-wrap">
           {[
             { value: 'prefix', label: 'Text Prefix' },
@@ -257,7 +270,9 @@ export default function StylePanel({
       <section>
         {showSaveInput ? (
           <div className="space-y-2">
+            <label htmlFor="palette-name-input" className="block text-xs text-slate-600 font-medium">Palette name</label>
             <input
+              id="palette-name-input"
               type="text"
               value={presetName}
               onChange={e => setPresetName(e.target.value)}

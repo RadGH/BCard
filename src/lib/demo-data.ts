@@ -1,5 +1,6 @@
 import type { PersonData } from '../types/card';
 import { uuid } from './uuid';
+import { getSampleData, getSampleCount } from '../constants/sample-data';
 
 // Example QR code shown on demo profiles (has "EXAMPLE" watermark)
 export const EXAMPLE_QR_CODE = {
@@ -26,21 +27,12 @@ function randPhone(): string {
   return `(${area}) ${a}-${b}`;
 }
 
-function generatePlaceholderPhoto(): string {
-  const hue = Math.floor(Math.random() * 360);
-  const initials = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-  return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="hsl(${hue},40%,60%)"/><circle cx="100" cy="75" r="35" fill="hsl(${hue},30%,85%)"/><ellipse cx="100" cy="170" rx="55" ry="50" fill="hsl(${hue},30%,85%)"/><text x="100" y="88" text-anchor="middle" font-size="32" font-family="sans-serif" fill="hsl(${hue},40%,40%)" font-weight="bold">${initials}</text></svg>`)}`;
-}
-
-function generatePlaceholderLogo(): string {
-  const hue = Math.floor(Math.random() * 360);
-  return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><rect width="200" height="100" fill="none"/><rect x="10" y="20" width="60" height="60" rx="12" fill="hsl(${hue},50%,50%)"/><rect x="80" y="30" width="110" height="8" rx="4" fill="hsl(${hue},30%,35%)"/><rect x="80" y="48" width="80" height="6" rx="3" fill="hsl(${hue},20%,60%)"/><rect x="80" y="62" width="95" height="6" rx="3" fill="hsl(${hue},20%,60%)"/></svg>`)}`;
-}
-
 export function generateDemoPerson(): PersonData {
   const firstName = pick(firstNames);
   const lastName = pick(lastNames);
   const company = pick(companies);
+  const sampleIndex = Math.floor(Math.random() * getSampleCount());
+  const sample = getSampleData(sampleIndex);
 
   return {
     id: uuid(),
@@ -60,8 +52,8 @@ export function generateDemoPerson(): PersonData {
       ...(Math.random() > 0.5 && { twitter: `${firstName.toLowerCase()}_${lastName.toLowerCase()[0]}` }),
       ...(Math.random() > 0.6 && { instagram: `${firstName.toLowerCase()}.${lastName.toLowerCase()}` }),
     },
-    portrait: generatePlaceholderPhoto(),
-    logo: generatePlaceholderLogo(),
+    portrait: sample.portrait,
+    logo: sample.logo,
     qrCode: EXAMPLE_QR_CODE,
   };
 }

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const CARDS_KEY = 'bcard-saved-cards-v2';
@@ -16,7 +17,20 @@ function hasSavedCards(): boolean {
 export default function Header() {
   const location = useLocation();
   const isEditor = location.pathname.startsWith('/editor');
-  const showMyCards = hasSavedCards();
+  const [showMyCards, setShowMyCards] = useState(hasSavedCards);
+
+  useEffect(() => {
+    const handleStorage = () => setShowMyCards(hasSavedCards());
+    window.addEventListener('storage', handleStorage);
+
+    const handleCardsUpdate = () => setShowMyCards(hasSavedCards());
+    window.addEventListener('bcard-cards-updated', handleCardsUpdate);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('bcard-cards-updated', handleCardsUpdate);
+    };
+  }, []);
 
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-50">

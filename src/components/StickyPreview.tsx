@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import type { BusinessCardData, CardDesign } from '../types/card';
 import {
   renderFront,
@@ -32,6 +32,12 @@ export default function StickyPreview({
   onPreview,
 }: Props) {
   const { isCollapsed, setCollapsed } = useStickyPreview();
+
+  useEffect(() => {
+    if (window.innerWidth < 640) {
+      setCollapsed(true);
+    }
+  }, []);
 
   const frontLayout = useMemo(
     () => getFrontLayout(design.frontLayoutId),
@@ -199,8 +205,8 @@ export default function StickyPreview({
         {/* A01: Save button with aria-label */}
         <button
           onClick={onSave}
-          aria-label="Save changes"
-          title="Save changes"
+          aria-label="Checkpoint"
+          title="Checkpoint"
           className="flex flex-col items-center gap-0.5 px-1 py-1.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors"
         >
           <svg
@@ -217,7 +223,7 @@ export default function StickyPreview({
               d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
             />
           </svg>
-          <span className="text-[10px] font-medium leading-none">Save</span>
+          <span className="text-[10px] font-medium leading-none">Checkpoint</span>
         </button>
 
         {/* A01: Undo button with aria-label */}

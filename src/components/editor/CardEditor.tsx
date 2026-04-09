@@ -51,6 +51,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('profile');
   const [activePersonId, setActivePersonId] = useState<string | null>(null);
   const [showPrintMargins, setShowPrintMargins] = useState(false);
+  const [useBranding, setUseBranding] = useState(false);
+  const [advancedSide, setAdvancedSide] = useState<'front' | 'back'>('front');
 
   const [savedCards, setSavedCards] = useState<SavedCardEntry[]>(() => {
     try { return JSON.parse(localStorage.getItem(CARDS_KEY) ?? '[]'); } catch { return []; }
@@ -62,6 +64,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
   const persistCards = (cards: SavedCardEntry[]) => {
     localStorage.setItem(CARDS_KEY, JSON.stringify(cards));
     setSavedCards(cards);
+    window.dispatchEvent(new CustomEvent('bcard-cards-updated'));
   };
 
   const handleLoadCard = useCallback((card: SavedCardEntry) => {
@@ -163,8 +166,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
   return (
     <div>
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-        <div className="lg:sticky lg:top-18 lg:self-start w-full lg:w-1/2 xl:w-[55%]">
-          <CardPreview data={data} design={design} showPrintMargins={showPrintMargins} />
+        <div className="lg:sticky lg:top-14 lg:self-start w-full lg:w-1/2 xl:w-[55%]">
+          <CardPreview data={data} design={design} showPrintMargins={showPrintMargins} viewModeOverride={activeTab === 'advanced' ? advancedSide : undefined} />
         </div>
 
         <div className="w-full lg:w-1/2 xl:w-[45%]">
@@ -378,6 +381,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
               <AdvancedPanel
                 design={design}
                 onDesignChange={updateDesign}
+                side={advancedSide}
+                onSideChange={setAdvancedSide}
               />
             )}
             {activeTab === 'export' && (
@@ -396,14 +401,18 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
       <SimilarLayouts
         design={design}
         data={data}
-        onLayoutChange={frontLayoutId => updateDesign({ frontLayoutId })}
+        useBranding={useBranding}
+        onToggleBranding={setUseBranding}
+        onLayoutChange={(frontLayoutId, paletteId) => updateDesign({ frontLayoutId, ...(paletteId ? { paletteId } : {}) })}
       />
 
       {/* More layouts from other categories */}
       <MoreLayouts
         design={design}
         data={data}
-        onLayoutChange={frontLayoutId => updateDesign({ frontLayoutId })}
+        useBranding={useBranding}
+        onToggleBranding={setUseBranding}
+        onLayoutChange={(frontLayoutId, paletteId) => updateDesign({ frontLayoutId, ...(paletteId ? { paletteId } : {}) })}
       />
     </div>
   );

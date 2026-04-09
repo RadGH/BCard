@@ -6,6 +6,8 @@ import { DEFAULT_FONT_SIZES } from '../../types/card';
 interface Props {
   design: CardDesign;
   onDesignChange: (patch: Partial<CardDesign>) => void;
+  side?: 'front' | 'back';
+  onSideChange?: (side: 'front' | 'back') => void;
 }
 
 type Side = 'front' | 'back';
@@ -50,7 +52,7 @@ function SizeControl({
       <span className="text-sm text-slate-600 w-24 shrink-0">{label}</span>
       <button
         onClick={decrement}
-        className="w-7 h-7 flex items-center justify-center rounded border border-slate-300 text-slate-600 hover:bg-slate-100 transition-colors text-sm font-bold"
+        className="w-11 h-11 sm:w-7 sm:h-7 flex items-center justify-center rounded border border-slate-300 text-slate-600 hover:bg-slate-100 transition-colors text-sm font-bold"
       >
         −
       </button>
@@ -59,7 +61,7 @@ function SizeControl({
       </span>
       <button
         onClick={increment}
-        className="w-7 h-7 flex items-center justify-center rounded border border-slate-300 text-slate-600 hover:bg-slate-100 transition-colors text-sm font-bold"
+        className="w-11 h-11 sm:w-7 sm:h-7 flex items-center justify-center rounded border border-slate-300 text-slate-600 hover:bg-slate-100 transition-colors text-sm font-bold"
       >
         +
       </button>
@@ -79,8 +81,13 @@ function SizeControl({
   );
 }
 
-export default function AdvancedPanel({ design, onDesignChange }: Props) {
-  const [side, setSide] = useState<Side>('front');
+export default function AdvancedPanel({ design, onDesignChange, side: sideProp, onSideChange }: Props) {
+  const [localSide, setLocalSide] = useState<Side>('front');
+  const side = sideProp ?? localSide;
+  const handleSideChange = (s: Side) => {
+    setLocalSide(s);
+    onSideChange?.(s);
+  };
 
   const fontSizes = side === 'front' ? design.frontFontSizes : design.backFontSizes;
   const sideKey: keyof CardDesign = side === 'front' ? 'frontFontSizes' : 'backFontSizes';
@@ -108,7 +115,7 @@ export default function AdvancedPanel({ design, onDesignChange }: Props) {
         {(['front', 'back'] as Side[]).map(s => (
           <button
             key={s}
-            onClick={() => setSide(s)}
+            onClick={() => handleSideChange(s)}
             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors capitalize ${
               side === s ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700'
             }`}

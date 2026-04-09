@@ -13,7 +13,7 @@ import { getSampleData } from '../../constants/sample-data';
 interface Props {
   design: CardDesign;
   data: BusinessCardData;
-  onLayoutChange: (frontLayoutId: string) => void;
+  onLayoutChange: (frontLayoutId: string, paletteId?: string) => void;
   useBranding?: boolean;
   onToggleBranding?: (v: boolean) => void;
 }
@@ -46,11 +46,11 @@ export default function SimilarLayouts({
     const all = getAllFrontLayouts();
     const current = all.find(l => l.id === design.frontLayoutId);
     if (!current?.category) {
-      return all.filter(l => l.id !== design.frontLayoutId).slice(0, 8);
+      return all.filter(l => l.id !== design.frontLayoutId).slice(0, 6);
     }
     return all
       .filter(l => l.id !== design.frontLayoutId && l.category === current.category)
-      .slice(0, 8);
+      .slice(0, 6);
   }, [design.frontLayoutId]);
 
   const previewData = (data.firstName || data.lastName) ? data : getSampleData(0);
@@ -71,7 +71,7 @@ export default function SimilarLayouts({
           Use my branding
         </label>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {similar.map(layout => {
           const palette = brandingOn
             ? userPalette
@@ -82,7 +82,10 @@ export default function SimilarLayouts({
           return (
             <button
               key={layout.id}
-              onClick={() => onLayoutChange(layout.id)}
+              onClick={() => {
+                const paletteId = !brandingOn ? (layout.defaultPaletteId ?? undefined) : undefined;
+                onLayoutChange(layout.id, paletteId);
+              }}
               className="rounded-lg overflow-hidden border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all text-left"
             >
               <div style={{ aspectRatio: '95.25 / 57.15' }} className="bg-white overflow-hidden">

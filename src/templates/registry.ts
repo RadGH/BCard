@@ -70,19 +70,31 @@ function renderRegion(
   options?: RenderOptions,
 ): React.ReactElement {
   switch (regionName) {
-    case 'name-title':
+    case 'name-title': {
+      const ntColors = regionObj.textColorOverride
+        ? { ...colors, text: regionObj.textColorOverride, textMuted: regionObj.textColorOverride, primary: regionObj.textColorOverride }
+        : colors;
       return React.createElement(NameTitle, {
-        key: 'nt', data, colors, titleFont, bodyFont, region: regionObj,
+        key: 'nt', data, colors: ntColors, titleFont, bodyFont, region: regionObj,
         nameSizeOverride: options?.fontSizes?.name,
         titleSizeOverride: options?.fontSizes?.jobTitle,
         companySizeOverride: options?.fontSizes?.company,
       });
+    }
 
-    case 'contact-info':
-      return React.createElement(ContactInfo, { key: 'ci', data, colors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.contact });
+    case 'contact-info': {
+      const ciColors = regionObj.textColorOverride
+        ? { ...colors, textMuted: regionObj.textColorOverride }
+        : colors;
+      return React.createElement(ContactInfo, { key: 'ci', data, colors: ciColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.contact });
+    }
 
-    case 'social':
-      return React.createElement(SocialLinks, { key: 'sl', data, colors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.social });
+    case 'social': {
+      const slColors = regionObj.textColorOverride
+        ? { ...colors, textMuted: regionObj.textColorOverride }
+        : colors;
+      return React.createElement(SocialLinks, { key: 'sl', data, colors: slColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.social });
+    }
 
     case 'portrait':
       return React.createElement(PhotoSlot, {

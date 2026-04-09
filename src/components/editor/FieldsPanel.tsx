@@ -51,7 +51,7 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
 
   const handleAddNetwork = (networkId: string) => {
     if (!networkId) return;
-    updateSocial(networkId, '');
+    updateField('social', { ...(data.social ?? {}), [networkId]: '' });
     setShowNetworkPicker(false);
   };
 

@@ -36,6 +36,8 @@ export interface Region {
   align: 'left' | 'center' | 'right';
   verticalAlign: 'top' | 'middle' | 'bottom';
   clipShape?: 'rect' | 'circle' | 'rounded';
+  /** Override text color when region sits on a colored background band */
+  textColorOverride?: string;
 }
 
 export interface FrontLayout {

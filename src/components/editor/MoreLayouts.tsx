@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { BusinessCardData, CardDesign } from '../../types/card';
 import {
   getAllFrontLayouts,
@@ -13,8 +13,9 @@ import { getSampleData } from '../../constants/sample-data';
 interface Props {
   design: CardDesign;
   data: BusinessCardData;
-  onLayoutChange: (frontLayoutId: string) => void;
+  onLayoutChange: (frontLayoutId: string, paletteId?: string) => void;
   useBranding?: boolean;
+  onToggleBranding?: (v: boolean) => void;
 }
 
 const categoryNames: Record<string, string> = {
@@ -25,7 +26,11 @@ const categoryNames: Record<string, string> = {
   'qr-code': 'QR Code',
 };
 
-export default function MoreLayouts({ design, data, onLayoutChange, useBranding }: Props) {
+export default function MoreLayouts({ design, data, onLayoutChange, useBranding, onToggleBranding }: Props) {
+  const [localBranding, setLocalBranding] = useState(false);
+
+  const brandingOn = useBranding !== undefined ? useBranding : localBranding;
+
   const palette = useMemo(
     () => resolveColorPalette(design.paletteId, design.customColors),
     [design.paletteId, design.customColors]
@@ -53,7 +58,18 @@ export default function MoreLayouts({ design, data, onLayoutChange, useBranding 
 
   return (
     <div className="mt-8">
-      <h3 className="text-sm font-semibold text-slate-700 mb-4">More Layouts</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold text-slate-700">More Layouts</h3>
+        <label className="flex items-center gap-2 text-xs text-slate-500 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={brandingOn}
+            onChange={e => onToggleBranding ? onToggleBranding(e.target.checked) : setLocalBranding(e.target.checked)}
+            className="rounded"
+          />
+          Use my branding
+        </label>
+      </div>
       <div className="space-y-6">
         {entries.map(([category, layouts]) => (
           <div key={category}>
@@ -62,44 +78,24 @@ export default function MoreLayouts({ design, data, onLayoutChange, useBranding 
             </h4>
             <div className="grid grid-cols-3 gap-3">
               {layouts.map(layout => {
-                const layoutPalette = useBranding
+                const layoutPalette = brandingOn
                   ? palette
                   : (getPaletteById(layout.defaultPaletteId) ?? resolveColorPalette(getDefaultPaletteId()));
-                const titleFont = useBranding ? design.titleFont : DEFAULT_TITLE_FONT;
-                const bodyFont = useBranding ? design.bodyFont : DEFAULT_BODY_FONT;
-
-                const needsPortrait = layout.supports.portrait && !data.portrait;
-                const needsLogo = layout.supports.logo && !data.logo;
-                const needsQR = layout.supports.qrCode && !data.qrCode && !data.qrCodeUrl;
+                const titleFont = brandingOn ? design.titleFont : DEFAULT_TITLE_FONT;
+                const bodyFont = brandingOn ? design.bodyFont : DEFAULT_BODY_FONT;
 
                 return (
                   <button
                     key={layout.id}
-                    onClick={() => onLayoutChange(layout.id)}
-                    className="rounded-lg overflow-hidden border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all text-left relative"
+                    onClick={() => {
+                      const paletteId = !brandingOn ? (layout.defaultPaletteId ?? undefined) : undefined;
+                      onLayoutChange(layout.id, paletteId);
+                    }}
+                    className="rounded-lg overflow-hidden border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all text-left"
                   >
                     <div style={{ aspectRatio: '95.25 / 57.15' }} className="bg-white overflow-hidden">
                       {renderFront(previewData, layout, layoutPalette, titleFont, bodyFont)}
                     </div>
-                    {(needsPortrait || needsLogo || needsQR) && (
-                      <div className="absolute top-1 right-1 flex gap-0.5">
-                        {needsPortrait && (
-                          <span className="text-xs bg-black/50 text-white px-1 rounded" title="Needs portrait photo">
-                            👤
-                          </span>
-                        )}
-                        {needsLogo && (
-                          <span className="text-xs bg-black/50 text-white px-1 rounded" title="Needs logo">
-                            🏢
-                          </span>
-                        )}
-                        {needsQR && (
-                          <span className="text-xs bg-black/50 text-white px-1 rounded" title="Needs QR code">
-                            📱
-                          </span>
-                        )}
-                      </div>
-                    )}
                     <div className="px-2 py-1 bg-slate-50">
                       <p className="text-xs text-slate-600 truncate">{layout.name}</p>
                     </div>

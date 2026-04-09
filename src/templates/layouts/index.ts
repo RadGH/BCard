@@ -271,7 +271,7 @@ const groupA: FrontLayout[] = [
     supports: { portrait: false, logo: false, qrCode: false },
     defaultPaletteId: 'forest',
     regions: [
-      { name: 'name-title',   x: SX, y: BL,      width: SW, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX, y: BL,      width: SW, height: 20, align: 'left', verticalAlign: 'middle', textColorOverride: '#ffffff' },
       { name: 'contact-info', x: SX, y: SY + 17, width: SW * 0.55, height: 24, align: 'left', verticalAlign: 'top' },
       { name: 'social',       x: SX + SW * 0.6,  y: SY + 17, width: SW * 0.4, height: 24, align: 'left', verticalAlign: 'top' },
     ],
@@ -518,13 +518,13 @@ const groupB: FrontLayout[] = [
     supports: { portrait: false, logo: true, qrCode: false },
     defaultPaletteId: 'arctic',
     regions: [
-      { name: 'logo',         x: BL,      y: BL,  width: 20, height: CARD.HEIGHT, align: 'center', verticalAlign: 'middle' },
-      { name: 'name-title',   x: SX + 18, y: SY,  width: SW - 18, height: 18, align: 'left', verticalAlign: 'top' },
-      { name: 'contact-info', x: SX + 18, y: SY + 20, width: SW - 18, height: 16, align: 'left', verticalAlign: 'top' },
-      { name: 'social',       x: SX + 18, y: SY + 36, width: SW - 18, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'logo',         x: BL,      y: BL,  width: 22, height: CARD.HEIGHT, align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 22, y: SY,  width: SW - 22, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 22, y: SY + 20, width: SW - 22, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + 22, y: SY + 36, width: SW - 22, height: 8,  align: 'left', verticalAlign: 'top' },
     ],
     renderBackground: (colors: ColorPalette, _w: number, h: number) =>
-      e('rect', { key: 'logo-sidebar', x: 0, y: 0, width: 22, height: h, fill: colors.primary, opacity: 0.06 }),
+      e('rect', { key: 'logo-sidebar', x: 0, y: 0, width: 25, height: h, fill: colors.primary, opacity: 0.06 }),
   },
 
   // fl-b09 — Logo right sidebar, text left
@@ -536,13 +536,13 @@ const groupB: FrontLayout[] = [
     supports: { portrait: false, logo: true, qrCode: false },
     defaultPaletteId: 'sunset',
     regions: [
-      { name: 'name-title',   x: SX, y: SY,      width: SW - 22, height: 18, align: 'left', verticalAlign: 'top' },
-      { name: 'contact-info', x: SX, y: SY + 20, width: SW - 22, height: 16, align: 'left', verticalAlign: 'top' },
-      { name: 'social',       x: SX, y: SY + 36, width: SW - 22, height: 8,  align: 'left', verticalAlign: 'top' },
-      { name: 'logo',         x: W - BL - 18, y: BL, width: 18, height: CARD.HEIGHT, align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX, y: SY,      width: SW - 27, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 20, width: SW - 27, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 36, width: SW - 27, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'logo',         x: W - 27, y: BL, width: 24, height: CARD.HEIGHT, align: 'center', verticalAlign: 'middle' },
     ],
     renderBackground: (colors: ColorPalette, w: number, h: number) =>
-      e('rect', { key: 'logo-sidebar-r', x: w - 20, y: 0, width: 20, height: h, fill: colors.primary, opacity: 0.06 }),
+      e('rect', { key: 'logo-sidebar-r', x: w - 27, y: 0, width: 27, height: h, fill: colors.primary, opacity: 0.06 }),
   },
 
   // fl-b10 — Logo first, then name, minimal contact
@@ -588,9 +588,9 @@ const groupB: FrontLayout[] = [
     defaultPaletteId: 'copper',
     regions: [
       { name: 'logo',         x: BL,          y: BL, width: W * 0.34 - BL, height: CARD.HEIGHT, align: 'center', verticalAlign: 'middle' },
-      { name: 'name-title',   x: W * 0.38,    y: SY, width: W * 0.56,      height: 20, align: 'left', verticalAlign: 'top' },
-      { name: 'contact-info', x: W * 0.38,    y: SY + 22, width: W * 0.56, height: 16, align: 'left', verticalAlign: 'top' },
-      { name: 'social',       x: W * 0.38,    y: SY + 38, width: W * 0.56, height: 6,  align: 'left', verticalAlign: 'top' },
+      { name: 'name-title',   x: W * 0.42,    y: SY, width: W * 0.52,      height: 20, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: W * 0.42,    y: SY + 22, width: W * 0.52, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: W * 0.42,    y: SY + 38, width: W * 0.52, height: 6,  align: 'left', verticalAlign: 'top' },
     ],
     renderBackground: (colors: ColorPalette, _w: number, h: number) =>
       e('rect', { key: 'color-panel', x: 0, y: 0, width: W * 0.37, height: h, fill: colors.primary }),
@@ -911,9 +911,9 @@ const groupC: FrontLayout[] = [
     defaultPaletteId: 'ocean',
     regions: [
       { name: 'portrait',     x: BL, y: BL, width: 24, height: CARD.HEIGHT, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
-      { name: 'name-title',   x: SX + 22, y: SY,      width: SW - 22, height: 18, align: 'left', verticalAlign: 'top' },
-      { name: 'contact-info', x: SX + 22, y: SY + 20, width: SW - 22, height: 16, align: 'left', verticalAlign: 'top' },
-      { name: 'social',       x: SX + 22, y: SY + 36, width: SW - 22, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + 26, y: SY,      width: SW - 26, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 26, y: SY + 20, width: SW - 26, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + 26, y: SY + 36, width: SW - 26, height: 8,  align: 'left', verticalAlign: 'top' },
     ],
   },
 
@@ -942,7 +942,7 @@ const groupC: FrontLayout[] = [
     supports: { portrait: true, logo: false, qrCode: false },
     defaultPaletteId: 'navy',
     regions: [
-      { name: 'portrait',     x: BL, y: BL, width: CARD.WIDTH, height: CARD.HEIGHT * 0.48, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
+      { name: 'portrait',     x: 0, y: 0, width: W, height: H * 0.48, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
       { name: 'name-title',   x: SX, y: H * 0.5 + 2, width: SW * 0.6,  height: 14, align: 'left', verticalAlign: 'top' },
       { name: 'contact-info', x: SX, y: H * 0.5 + 17, width: SW, height: 12, align: 'left', verticalAlign: 'top' },
     ],
@@ -973,12 +973,20 @@ const groupC: FrontLayout[] = [
     supports: { portrait: true, logo: false, qrCode: false },
     defaultPaletteId: 'copper',
     regions: [
-      { name: 'portrait',     x: BL, y: BL, width: CARD.WIDTH, height: CARD.HEIGHT, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
-      { name: 'name-title',   x: SX + 2, y: H - 26, width: SW - 4, height: 12, align: 'left', verticalAlign: 'bottom' },
+      { name: 'portrait',     x: 0, y: 0, width: W, height: H, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
+      { name: 'name-title',   x: SX + 2, y: H - 26, width: SW - 4, height: 12, align: 'left', verticalAlign: 'bottom', textColorOverride: '#ffffff' },
       { name: 'contact-info', x: SX + 2, y: H - 14, width: SW - 4, height: 10, align: 'left', verticalAlign: 'top' },
     ],
-    renderBackground: (colors: ColorPalette, w: number, h: number) =>
-      e('rect', { key: 'overlay', x: 0, y: h * 0.56, width: w, height: h * 0.44, fill: colors.primary, opacity: 0.75 }),
+    renderBackground: (_colors: ColorPalette, w: number, h: number) =>
+      e('g', { key: 'overlay-group' },
+        e('defs', {},
+          e('linearGradient', { id: 'portrait-overlay-grad', x1: '0', y1: '0', x2: '0', y2: '1' },
+            e('stop', { offset: '0%', stopColor: '#000000', stopOpacity: 0 }),
+            e('stop', { offset: '100%', stopColor: '#000000', stopOpacity: 0.65 }),
+          ),
+        ),
+        e('rect', { x: 0, y: h * 0.45, width: w, height: h * 0.55, fill: 'url(#portrait-overlay-grad)' }),
+      ),
   },
 
   // fl-c06 — Portrait left, all content centered on right half
@@ -1052,9 +1060,9 @@ const groupC: FrontLayout[] = [
     supports: { portrait: true, logo: false, qrCode: false },
     defaultPaletteId: 'emerald',
     regions: [
-      { name: 'portrait',     x: BL, y: BL, width: W * 0.58 - BL, height: CARD.HEIGHT, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
-      { name: 'name-title',   x: W * 0.62, y: SY, width: W * 0.33, height: SH * 0.5, align: 'left', verticalAlign: 'middle' },
-      { name: 'contact-info', x: W * 0.62, y: SY + SH * 0.55, width: W * 0.33, height: SH * 0.45, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: 0, y: 0, width: W * 0.62, height: H, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
+      { name: 'name-title',   x: W * 0.65, y: SY, width: W * 0.30, height: SH * 0.5, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: W * 0.65, y: SY + SH * 0.55, width: W * 0.30, height: SH * 0.45, align: 'left', verticalAlign: 'top' },
     ],
   },
 
@@ -1083,9 +1091,9 @@ const groupC: FrontLayout[] = [
     defaultPaletteId: 'teal',
     regions: [
       { name: 'portrait',     x: BL + 1, y: BL + 1, width: 22, height: CARD.HEIGHT - 2, align: 'center', verticalAlign: 'top', clipShape: 'rounded' },
-      { name: 'name-title',   x: SX + 21, y: SY,      width: SW - 21, height: 18, align: 'left', verticalAlign: 'top' },
-      { name: 'contact-info', x: SX + 21, y: SY + 20, width: SW - 21, height: 16, align: 'left', verticalAlign: 'top' },
-      { name: 'social',       x: SX + 21, y: SY + 36, width: SW - 21, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + 25, y: SY,      width: SW - 25, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 25, y: SY + 20, width: SW - 25, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + 25, y: SY + 36, width: SW - 25, height: 8,  align: 'left', verticalAlign: 'top' },
     ],
   },
 
@@ -1098,12 +1106,12 @@ const groupC: FrontLayout[] = [
     supports: { portrait: true, logo: false, qrCode: false },
     defaultPaletteId: 'midnight',
     regions: [
-      { name: 'name-title',   x: SX, y: SY,      width: W * 0.3, height: SH * 0.5, align: 'left', verticalAlign: 'middle' },
-      { name: 'contact-info', x: SX, y: SY + SH * 0.55, width: W * 0.3, height: SH * 0.45, align: 'left', verticalAlign: 'top' },
-      { name: 'portrait',     x: W * 0.33, y: BL, width: W * 0.63, height: CARD.HEIGHT, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
+      { name: 'name-title',   x: SX, y: SY,      width: W * 0.32, height: SH * 0.5, align: 'left', verticalAlign: 'middle', textColorOverride: '#ffffff' },
+      { name: 'contact-info', x: SX, y: SY + SH * 0.55, width: W * 0.32, height: SH * 0.45, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: W * 0.38, y: 0, width: W * 0.62, height: H, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
     ],
     renderBackground: (colors: ColorPalette, _w: number, h: number) =>
-      e('rect', { key: 'text-panel', x: 0, y: 0, width: W * 0.34, height: h, fill: colors.primary }),
+      e('rect', { key: 'text-panel', x: 0, y: 0, width: W * 0.37, height: h, fill: colors.primary }),
   },
 
   // fl-c14 — Portrait with tagline below it
@@ -1131,8 +1139,8 @@ const groupC: FrontLayout[] = [
     supports: { portrait: true, logo: false, qrCode: false },
     defaultPaletteId: 'navy',
     regions: [
-      { name: 'portrait',     x: BL, y: BL, width: 18, height: 18, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
-      { name: 'name-title',   x: SX + 17, y: BL, width: SW - 17, height: 18, align: 'left', verticalAlign: 'middle' },
+      { name: 'portrait',     x: BL, y: BL, width: 17, height: 17, align: 'center', verticalAlign: 'top', clipShape: 'rect' },
+      { name: 'name-title',   x: SX + 17, y: BL, width: SW - 17, height: 18, align: 'left', verticalAlign: 'middle', textColorOverride: '#ffffff' },
       { name: 'contact-info', x: SX, y: SY + 15, width: SW * 0.55, height: 24, align: 'left', verticalAlign: 'top' },
       { name: 'social',       x: SX + SW * 0.6, y: SY + 15, width: SW * 0.4, height: 24, align: 'left', verticalAlign: 'top' },
     ],
@@ -1668,10 +1676,10 @@ const groupF: FrontLayout[] = [
     supports: { portrait: false, logo: true, qrCode: true },
     defaultPaletteId: 'midnight',
     regions: [
-      { name: 'name-title',   x: SX,               y: SY,           width: SW,       height: 22,  align: 'center', verticalAlign: 'middle' },
-      { name: 'contact-info', x: SX,               y: SY + 24,      width: SW * 0.6, height: 10,  align: 'center', verticalAlign: 'top' },
-      { name: 'logo',         x: SX,               y: SY + SH - 12, width: 22,       height: 12,  align: 'left',   verticalAlign: 'middle' },
-      { name: 'qr-code',      x: SX + SW - 18,     y: SY + SH - 18, width: 18,       height: 18,  align: 'right',  verticalAlign: 'bottom' },
+      { name: 'name-title',   x: SX,               y: SY,           width: SW,       height: 18,  align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,               y: SY + 20,      width: SW,       height: 10,  align: 'center', verticalAlign: 'top' },
+      { name: 'logo',         x: BL + 3,           y: H - 18,       width: 26,       height: 14,  align: 'left',   verticalAlign: 'middle' },
+      { name: 'qr-code',      x: W - BL - 18,      y: H - 19,       width: 16,       height: 16,  align: 'right',  verticalAlign: 'middle' },
     ],
     renderBackground: (colors: ColorPalette, w: number, h: number) =>
       e('rect', { key: 'btm-bar', x: 0, y: h - 21, width: w, height: 21, fill: colors.primary }),

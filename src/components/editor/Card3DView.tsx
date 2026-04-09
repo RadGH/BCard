@@ -116,11 +116,13 @@ export default function Card3DView({ data, design, onClose }: Props) {
           onPointerUp={handlePointerUp}
         >
           <div
-            className="w-full transition-transform cursor-grab active:cursor-grabbing"
+            className="w-full cursor-grab active:cursor-grabbing"
             style={{
               transformStyle: 'preserve-3d',
-              transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-              animation: autoSpin ? 'spin3d 8s linear infinite' : 'none',
+              ...(autoSpin
+                ? { animation: 'spin3d 8s linear infinite' }
+                : { transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }
+              ),
             }}
           >
             {/* Front */}

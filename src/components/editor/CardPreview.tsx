@@ -10,6 +10,7 @@ interface Props {
   data: BusinessCardData;
   design: CardDesign;
   showPrintMargins?: boolean;
+  viewModeOverride?: 'front' | 'back' | 'both';
 }
 
 function PrintMarginOverlay() {
@@ -35,9 +36,11 @@ function PrintMarginOverlay() {
 
 type ViewMode = 'both' | 'front' | 'back';
 
-export default function CardPreview({ data, design, showPrintMargins = false }: Props) {
+export default function CardPreview({ data, design, showPrintMargins = false, viewModeOverride }: Props) {
   const [viewMode, setViewMode] = useState<ViewMode>('both');
   const [show3D, setShow3D] = useState(false);
+
+  const effectiveViewMode = viewModeOverride ?? viewMode;
 
   const frontLayout = useMemo(() => getFrontLayout(design.frontLayoutId), [design.frontLayoutId]);
   const backLayout = useMemo(() => getBackLayout(design.backLayoutId), [design.backLayoutId]);
@@ -93,11 +96,11 @@ export default function CardPreview({ data, design, showPrintMargins = false }: 
     setViewMode(m => m === 'both' ? 'front' : m === 'front' ? 'back' : 'both');
   };
 
-  const viewModeLabel = viewMode === 'both' ? 'Showing: Both' : viewMode === 'front' ? 'Showing: Front' : 'Showing: Back';
+  const viewModeLabel = effectiveViewMode === 'both' ? 'Showing: Both' : effectiveViewMode === 'front' ? 'Showing: Front' : 'Showing: Back';
 
   return (
     <div className="flex flex-col items-center gap-3">
-      {viewMode === 'both' ? (
+      {effectiveViewMode === 'both' ? (
         <div className="w-full space-y-2" style={{ maxWidth: '500px' }}>
           <div>
             <p className="text-xs text-slate-400 text-center mb-1">Front</p>
@@ -130,11 +133,11 @@ export default function CardPreview({ data, design, showPrintMargins = false }: 
         /* A06: Added role="img" and aria-label */
         <div
           role="img"
-          aria-label={`Business card ${viewMode}${data.firstName ? ` for ${[data.firstName, data.lastName].filter(Boolean).join(' ')}` : ''}`}
+          aria-label={`Business card ${effectiveViewMode}${data.firstName ? ` for ${[data.firstName, data.lastName].filter(Boolean).join(' ')}` : ''}`}
           className="w-full bg-white rounded-lg shadow-lg overflow-hidden border border-slate-200 relative"
           style={{ aspectRatio: '95.25 / 57.15', maxWidth: '500px' }}
         >
-          {viewMode === 'front'
+          {effectiveViewMode === 'front'
             ? (frontSvg ?? <div className="text-slate-400 text-center text-sm py-8">No layout selected</div>)
             : (backSvg ?? <div className="text-slate-400 text-center text-sm py-8">No back layout</div>)
           }

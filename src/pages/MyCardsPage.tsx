@@ -79,6 +79,7 @@ function CardThumbnail({ data, design }: { data: BusinessCardData; design: CardD
 export default function MyCardsPage() {
   const navigate = useNavigate();
   const [cards, setCards] = useState<SavedCardEntry[]>(() => loadCards());
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
   const handleEdit = (card: SavedCardEntry) => {
     // Dispatch load event, navigate to editor
@@ -143,15 +144,32 @@ export default function MyCardsPage() {
                     <SquarePen className="inline w-3 h-3 mr-1" />
                     Edit
                   </button>
-                  {/* A01: Delete button with aria-label */}
-                  <button
-                    onClick={() => handleDelete(card.id)}
-                    aria-label={`Delete card "${card.name}"`}
-                    title="Delete card"
-                    className="px-2 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <Trash2 className="w-3 h-3" aria-hidden="true" />
-                  </button>
+                  {/* A01: Delete button with inline confirmation */}
+                  {confirmDeleteId === card.id ? (
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() => { handleDelete(card.id); setConfirmDeleteId(null); }}
+                        className="px-2 py-1.5 bg-red-500 text-white rounded-lg text-xs font-medium hover:bg-red-600 transition-colors"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        onClick={() => setConfirmDeleteId(null)}
+                        className="px-2 py-1.5 text-slate-500 hover:bg-slate-100 rounded-lg text-xs transition-colors"
+                      >
+                        No
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setConfirmDeleteId(card.id)}
+                      aria-label={`Delete card "${card.name}"`}
+                      title="Delete card"
+                      className="px-2 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-3 h-3" aria-hidden="true" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

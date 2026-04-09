@@ -92,12 +92,13 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Corner Accent',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
+      const m = 7;
       const s = Math.min(w, h) * 0.15;
       return React.createElement('g', { transform: t || undefined, stroke: colors.primary, strokeWidth: 1.5, fill: 'none' },
         // Top-left corner
-        React.createElement('polyline', { points: `${s},2 2,2 2,${s}` }),
+        React.createElement('polyline', { points: `${m + s},${m} ${m},${m} ${m},${m + s}` }),
         // Bottom-right corner
-        React.createElement('polyline', { points: `${w - s},${h - 2} ${w - 2},${h - 2} ${w - 2},${h - s}` }),
+        React.createElement('polyline', { points: `${w - m - s},${h - m} ${w - m},${h - m} ${w - m},${h - m - s}` }),
       );
     },
   },
@@ -221,7 +222,7 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Full Border',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
-      const m = 2.5;
+      const m = 7;
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', {
           x: m, y: m, width: w - m * 2, height: h - m * 2,
@@ -236,7 +237,7 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Thin Border',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
-      const m = 2.5;
+      const m = 7;
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', {
           x: m, y: m, width: w - m * 2, height: h - m * 2,
@@ -251,7 +252,7 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Dotted Border',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
-      const m = 2.5;
+      const m = 7;
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', {
           x: m, y: m, width: w - m * 2, height: h - m * 2,
@@ -267,7 +268,7 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Double Border',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
-      const m1 = 2, m2 = 4.5;
+      const m1 = 7, m2 = 9;
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', {
           x: m1, y: m1, width: w - m1 * 2, height: h - m1 * 2,
@@ -415,7 +416,7 @@ export const cardBackgrounds: CardBackground[] = [
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
       const s = Math.min(w, h) * 0.14;
-      const m = 2;
+      const m = 7;
       return React.createElement('g', {
         transform: t || undefined,
         stroke: colors.primary, strokeWidth: 1.2, fill: 'none',
@@ -433,7 +434,7 @@ export const cardBackgrounds: CardBackground[] = [
     name: 'Inner Glow',
     render: (colors, w, h, flipH, flipV) => {
       const t = flipTransform(flipH, flipV, w, h);
-      const m = 3;
+      const m = 7;
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', {
           x: m, y: m, width: w - m * 2, height: h - m * 2,
@@ -510,27 +511,6 @@ export const cardBackgrounds: CardBackground[] = [
       return React.createElement('g', { transform: t || undefined },
         React.createElement('rect', { x: 0, y: 0, width: w, height: bh, fill: colors.primary }),
         React.createElement('rect', { x: 0, y: h - bh, width: w, height: bh, fill: colors.secondary }),
-      );
-    },
-  },
-
-  {
-    id: 'tree-silhouette',
-    name: 'Tree Silhouette',
-    render: (colors, w, h, flipH, flipV) => {
-      const t = flipTransform(flipH, flipV, w, h);
-      const cx = w * 0.12;
-      const base = h * 0.85;
-      const trunkW = w * 0.025;
-      const trunkH = h * 0.2;
-      const crownR = h * 0.26;
-      return React.createElement('g', { transform: t || undefined, fill: colors.primary, opacity: 0.55 },
-        React.createElement('polygon', {
-          points: `${cx},${base - trunkH - crownR * 1.6} ${cx - crownR},${base - trunkH} ${cx + crownR},${base - trunkH}`,
-        }),
-        React.createElement('rect', {
-          x: cx - trunkW / 2, y: base - trunkH, width: trunkW, height: trunkH,
-        }),
       );
     },
   },
@@ -629,32 +609,6 @@ export const cardBackgrounds: CardBackground[] = [
     },
   },
 
-  {
-    id: 'zen-circle',
-    name: 'Zen Circle',
-    render: (colors, w, h, flipH, flipV) => {
-      const t = flipTransform(flipH, flipV, w, h);
-      const r = h * 0.72;
-      const cx = w * 0.12;
-      const cy = h * 0.88;
-      // Large arc: start at top of circle, sweep ~270deg, leave a gap
-      const startX = cx + r * Math.cos(Math.PI * 1.1);
-      const startY = cy + r * Math.sin(Math.PI * 1.1);
-      const endX   = cx + r * Math.cos(Math.PI * 1.85);
-      const endY   = cy + r * Math.sin(Math.PI * 1.85);
-      const d = `M ${startX} ${startY} A ${r} ${r} 0 1 1 ${endX} ${endY}`;
-      return React.createElement('g', { transform: t || undefined },
-        React.createElement('path', {
-          d,
-          fill: 'none',
-          stroke: colors.primary,
-          strokeWidth: 2.2,
-          strokeLinecap: 'round',
-          opacity: 0.45,
-        }),
-      );
-    },
-  },
 ];
 
 export function getBackground(id: string): CardBackground | undefined {
