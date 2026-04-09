@@ -7,6 +7,9 @@
     AddType application/json      .json
 </IfModule>
 
+# Ensure index.html is served over any index.php placeholder
+DirectoryIndex index.html
+
 # SPA fallback — serve index.html for any path that isn't a real file
 Options -MultiViews
 RewriteEngine On
