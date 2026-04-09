@@ -1,0 +1,12 @@
+export const CARD = {
+  WIDTH: 88.9,
+  HEIGHT: 50.8,
+  BLEED: 3.175,
+  TOTAL_WIDTH: 95.25,
+  TOTAL_HEIGHT: 57.15,
+  SAFE_MARGIN: 3.175,
+  SAFE_WIDTH: 82.55,
+  SAFE_HEIGHT: 44.45,
+  SAFE_X: 6.35,
+  SAFE_Y: 6.35,
+} as const;
