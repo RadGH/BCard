@@ -12,6 +12,20 @@ dist
 dist-ssr
 *.local
 
+# Local dev scripts
+dev-server.sh
+push.sh
+
+# Font Awesome - only keep all.min.css and webfonts/
+public/fontawesome/svgs/
+public/fontawesome/js/
+public/fontawesome/less/
+public/fontawesome/scss/
+public/fontawesome/sprites/
+public/fontawesome/metadata/
+public/fontawesome/css/
+!public/fontawesome/css/all.min.css
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
