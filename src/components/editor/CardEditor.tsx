@@ -441,8 +441,6 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                 onDesignChange={updateDesign}
                 side={advancedSide}
                 onSideChange={setAdvancedSide}
-                data={data}
-                onDataChange={setData}
               />
             )}
             {activeTab === 'export' && (
@@ -451,6 +449,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                 design={design}
                 showPrintMargins={showPrintMargins}
                 onTogglePrintMargins={setShowPrintMargins}
+                onDataChange={setData}
+                onDesignChange={setDesign}
               />
             )}
           </div>

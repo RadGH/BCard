@@ -6,20 +6,30 @@ import { downloadPdf } from '../../lib/pdf-export';
 import Card3DView from './Card3DView';
 import PreviewGallery from './PreviewGallery';
 
+interface ExportFile {
+  version: 1;
+  exportedAt: string;
+  data: BusinessCardData;
+  design: CardDesign;
+}
+
 interface Props {
   data: BusinessCardData;
   design: CardDesign;
   showPrintMargins?: boolean;
   onTogglePrintMargins?: (v: boolean) => void;
+  onDataChange?: (data: BusinessCardData) => void;
+  onDesignChange?: (design: CardDesign) => void;
 }
 
-export default function ExportPanel({ data, design, showPrintMargins = false, onTogglePrintMargins }: Props) {
+export default function ExportPanel({ data, design, showPrintMargins = false, onTogglePrintMargins, onDataChange, onDesignChange }: Props) {
   const [exporting, setExporting] = useState<string | null>(null);
   const [pngScale, setPngScale] = useState(2);
   const [show3D, setShow3D] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [eraseConfirm, setEraseConfirm] = useState(false);
+  const [cardImportMessage, setCardImportMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const handleSvgExport = async (side: 'front' | 'back') => {
     setExporting(`svg-${side}`);
@@ -98,6 +108,45 @@ export default function ExportPanel({ data, design, showPrintMargins = false, on
     ['bcard-saved-cards-v2', 'bcard-people', 'bcard-palette-presets', 'bcard-font-sets', 'bcard-draft-v2'].forEach(k => localStorage.removeItem(k));
     setEraseConfirm(false);
     window.location.reload();
+  };
+
+  const handleExportCard = () => {
+    const payload: ExportFile = { version: 1, exportedAt: new Date().toISOString(), data, design };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'business-card.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportCard = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.currentTarget.value = '';
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target?.result as string) as unknown;
+        if (
+          typeof parsed !== 'object' || parsed === null ||
+          (parsed as ExportFile).version !== 1 ||
+          typeof (parsed as ExportFile).data !== 'object' ||
+          typeof (parsed as ExportFile).design !== 'object'
+        ) {
+          setCardImportMessage({ type: 'error', text: 'Invalid file.' });
+          return;
+        }
+        const imported = parsed as ExportFile;
+        onDataChange?.(imported.data);
+        onDesignChange?.(imported.design);
+        setCardImportMessage({ type: 'success', text: 'Card imported.' });
+      } catch {
+        setCardImportMessage({ type: 'error', text: 'Failed to parse file.' });
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -216,6 +265,33 @@ export default function ExportPanel({ data, design, showPrintMargins = false, on
           {exporting === 'print' ? 'Preparing...' : 'Print Business Card'}
         </button>
       </section>
+
+      {/* Card Export / Import */}
+      {(onDataChange || onDesignChange) && (
+        <section>
+          <h3 className="text-sm font-semibold text-slate-700 mb-3">Export / Import Card</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={handleExportCard}
+              className="flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              <Download className="w-4 h-4" aria-hidden="true" />
+              Export Card
+            </button>
+            <label className="flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
+              <Upload className="w-4 h-4" aria-hidden="true" />
+              Import Card
+              <input type="file" accept=".json" className="hidden" onChange={handleImportCard} />
+            </label>
+          </div>
+          {cardImportMessage && (
+            <p className={`mt-2 text-xs font-medium ${cardImportMessage.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+              {cardImportMessage.text}
+            </p>
+          )}
+          <p className="text-xs text-slate-400 mt-2">Saves current card data and design to a JSON file, including uploaded images.</p>
+        </section>
+      )}
 
       {/* Advanced - A03: Added aria-expanded and aria-controls */}
       <section>

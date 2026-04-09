@@ -1,22 +1,14 @@
-import { useState, useRef } from 'react';
-import { RotateCcw, Download, Upload } from 'lucide-react';
-import type { BusinessCardData, CardDesign, CardFontSizes } from '../../types/card';
+import { useState } from 'react';
+import { RotateCcw } from 'lucide-react';
+import type { CardDesign, CardFontSizes } from '../../types/card';
 import { DEFAULT_FONT_SIZES } from '../../types/card';
 
-interface ExportFile {
-  version: 1;
-  exportedAt: string;
-  data: BusinessCardData;
-  design: CardDesign;
-}
 
 interface Props {
   design: CardDesign;
   onDesignChange: (patch: Partial<CardDesign>) => void;
   side?: 'front' | 'back';
   onSideChange?: (side: 'front' | 'back') => void;
-  data?: BusinessCardData;
-  onDataChange?: (data: BusinessCardData) => void;
 }
 
 type Side = 'front' | 'back';
@@ -154,11 +146,9 @@ function ScaleControl({
   );
 }
 
-export default function AdvancedPanel({ design, onDesignChange, side: sideProp, onSideChange, data, onDataChange }: Props) {
+export default function AdvancedPanel({ design, onDesignChange, side: sideProp, onSideChange }: Props) {
   const [localSide, setLocalSide] = useState<Side>('front');
   const side = sideProp ?? localSide;
-  const [importMessage, setImportMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
   const handleSideChange = (s: Side) => {
     setLocalSide(s);
     onSideChange?.(s);
@@ -200,96 +190,8 @@ export default function AdvancedPanel({ design, onDesignChange, side: sideProp, 
   const hasAnyOverrides = fontSizes && Object.keys(fontSizes).length > 0;
   const hasAnyScaleOverrides = imageScales && Object.keys(imageScales).length > 0;
 
-  const handleExport = () => {
-    if (!data) return;
-    const payload: ExportFile = {
-      version: 1,
-      exportedAt: new Date().toISOString(),
-      data,
-      design,
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'business-card.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleImportClick = () => {
-    fileRef.current?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    // Reset so selecting the same file again still triggers onChange
-    e.target.value = '';
-
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const parsed = JSON.parse(ev.target?.result as string) as unknown;
-        if (
-          typeof parsed !== 'object' ||
-          parsed === null ||
-          (parsed as ExportFile).version !== 1 ||
-          typeof (parsed as ExportFile).data !== 'object' ||
-          typeof (parsed as ExportFile).design !== 'object'
-        ) {
-          setImportMessage({ type: 'error', text: 'Invalid file: missing required fields or unsupported version.' });
-          return;
-        }
-        const file = parsed as ExportFile;
-        onDataChange?.(file.data);
-        onDesignChange(file.design);
-        setImportMessage({ type: 'success', text: 'Card imported successfully.' });
-      } catch {
-        setImportMessage({ type: 'error', text: 'Failed to parse file. Make sure it is a valid JSON export.' });
-      }
-    };
-    reader.readAsText(file);
-  };
-
   return (
     <div className="space-y-5">
-      {/* Export / Import section */}
-      {data && onDataChange && (
-        <section className="border border-slate-200 rounded-lg p-4">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">Export / Import</h3>
-          <div className="flex gap-2">
-            <button
-              onClick={handleExport}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
-            >
-              <Download className="w-4 h-4" aria-hidden="true" />
-              Export Card
-            </button>
-            <button
-              onClick={handleImportClick}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
-            >
-              <Upload className="w-4 h-4" aria-hidden="true" />
-              Import Card
-            </button>
-            <input
-              ref={fileRef}
-              type="file"
-              accept=".json"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-          </div>
-          {importMessage && (
-            <p className={`mt-2 text-xs font-medium ${importMessage.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-              {importMessage.text}
-            </p>
-          )}
-          <p className="text-xs text-slate-400 mt-2">Export saves all card data and settings to JSON. Import replaces the current card entirely.</p>
-        </section>
-      )}
-
       {/* Side subtabs */}
       <div className="flex border-b border-slate-200">
         {(['front', 'back'] as Side[]).map(s => (
