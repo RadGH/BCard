@@ -7,6 +7,7 @@ import MyCardsPage from './pages/MyCardsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import DemoAssetsPage from './pages/DemoAssetsPage';
 import StickyPreview from './components/StickyPreview';
 import { CardDataProvider, useCardDataContext } from './context/CardDataContext';
 import type { BusinessCardData, CardDesign } from './types/card';
@@ -129,6 +130,7 @@ export default function App() {
           <Route path="/cards" element={<MyCardsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/demo-assets" element={<DemoAssetsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <StickyPreviewWrapper />
