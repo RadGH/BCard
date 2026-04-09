@@ -12,8 +12,8 @@ const samples: BusinessCardData[] = [
     website: 'www.nexusdyn.com',
     tagline: 'Innovation through collaboration',
     social: { linkedin: 'sarahchen' },
-    logo: '/images/logos/nexus-dynamics.png',
-    portrait: '/images/portraits/sarah-chen.png',
+    logo: '/images/logos/nexus-dynamics.webp',
+    portrait: '/images/portraits/sarah-chen.webp',
   },
   {
     firstName: 'Marcus',
@@ -24,8 +24,8 @@ const samples: BusinessCardData[] = [
     phone: '(512) 555-0198',
     website: 'vertexlabs.io',
     social: { github: 'mrodriguez', linkedin: 'marcusrodriguez' },
-    logo: '/images/logos/vertex-labs.png',
-    portrait: '/images/portraits/marcus-rodriguez.png',
+    logo: '/images/logos/vertex-labs.webp',
+    portrait: '/images/portraits/marcus-rodriguez.webp',
   },
   {
     firstName: 'Emily',
@@ -36,8 +36,8 @@ const samples: BusinessCardData[] = [
     phone: '(323) 555-0167',
     website: 'prismstudio.co',
     social: { instagram: 'prismstudio' },
-    logo: '/images/logos/prism-studio.png',
-    portrait: '/images/portraits/emily-whitfield.png',
+    logo: '/images/logos/prism-studio.webp',
+    portrait: '/images/portraits/emily-whitfield.webp',
   },
   {
     firstName: 'Dr. James',
@@ -48,8 +48,8 @@ const samples: BusinessCardData[] = [
     email: 'j.okafor@metroheart.org',
     phone: '(212) 555-0234',
     website: 'metroheart.org',
-    logo: '/images/logos/metro-heart.png',
-    portrait: '/images/portraits/james-okafor.png',
+    logo: '/images/logos/metro-heart.webp',
+    portrait: '/images/portraits/james-okafor.webp',
   },
   {
     firstName: 'Aisha',
@@ -61,8 +61,8 @@ const samples: BusinessCardData[] = [
     phone: '(617) 555-0189',
     website: 'patellaw.com',
     tagline: 'Trusted counsel for complex matters',
-    logo: '/images/logos/patel-associates.png',
-    portrait: '/images/portraits/aisha-patel.png',
+    logo: '/images/logos/patel-associates.webp',
+    portrait: '/images/portraits/aisha-patel.webp',
   },
   {
     firstName: 'David',
@@ -73,8 +73,8 @@ const samples: BusinessCardData[] = [
     phone: '(503) 555-0156',
     website: 'summitrealty.com',
     social: { instagram: 'davidkimura_realty' },
-    logo: '/images/logos/summit-realty.png',
-    portrait: '/images/portraits/sarah-chen.png',  // reuse
+    logo: '/images/logos/summit-realty.webp',
+    portrait: '/images/portraits/sarah-chen.webp',  // reuse
   },
   {
     firstName: 'Luna',
@@ -85,8 +85,8 @@ const samples: BusinessCardData[] = [
     phone: '(206) 555-0123',
     website: 'pixelflow.design',
     social: { linkedin: 'lunabergstrom', twitter: 'lunadesigns' },
-    logo: '/images/logos/pixel-flow.png',
-    portrait: '/images/portraits/luna-bergstrom.png',
+    logo: '/images/logos/pixel-flow.webp',
+    portrait: '/images/portraits/luna-bergstrom.webp',
   },
   {
     firstName: 'Thomas',
@@ -97,8 +97,8 @@ const samples: BusinessCardData[] = [
     email: 'thomas@meridianwealth.com',
     phone: '(312) 555-0178',
     website: 'meridianwealth.com',
-    logo: '/images/logos/meridian-wealth.png',
-    portrait: '/images/portraits/marcus-rodriguez.png',  // reuse
+    logo: '/images/logos/meridian-wealth.webp',
+    portrait: '/images/portraits/marcus-rodriguez.webp',  // reuse
   },
   {
     firstName: 'Mei',
@@ -109,8 +109,8 @@ const samples: BusinessCardData[] = [
     phone: '(650) 555-0145',
     website: 'cloudscale.dev',
     social: { linkedin: 'meizhang', twitter: 'meizh' },
-    logo: '/images/logos/cloudscale.png',
-    portrait: '/images/portraits/emily-whitfield.png',  // reuse
+    logo: '/images/logos/cloudscale.webp',
+    portrait: '/images/portraits/emily-whitfield.webp',  // reuse
   },
   {
     firstName: 'Carlos',
@@ -122,8 +122,8 @@ const samples: BusinessCardData[] = [
     website: 'tierrarestaurant.com',
     social: { instagram: 'chefcarlos' },
     tagline: 'Farm to table, heart to plate',
-    logo: '/images/logos/tierra-restaurant.png',
-    portrait: '/images/portraits/carlos-mendez.png',
+    logo: '/images/logos/tierra-restaurant.webp',
+    portrait: '/images/portraits/carlos-mendez.webp',
   },
   {
     firstName: 'Rachel',
@@ -134,8 +134,8 @@ const samples: BusinessCardData[] = [
     phone: '(720) 555-0134',
     website: 'fostervisuals.com',
     social: { instagram: 'fostervisuals', twitter: 'rachelfoster' },
-    logo: '/images/logos/foster-visuals.png',
-    portrait: '/images/portraits/grace-obrien.png',  // reuse
+    logo: '/images/logos/foster-visuals.webp',
+    portrait: '/images/portraits/grace-obrien.webp',  // reuse
   },
   {
     firstName: 'Nikolai',
@@ -146,8 +146,8 @@ const samples: BusinessCardData[] = [
     phone: '(408) 555-0190',
     website: 'quantumanalytics.ai',
     social: { github: 'npetrov', linkedin: 'nikolaipetrov' },
-    logo: '/images/logos/quantum-analytics.png',
-    portrait: '/images/portraits/james-okafor.png',  // reuse
+    logo: '/images/logos/quantum-analytics.webp',
+    portrait: '/images/portraits/james-okafor.webp',  // reuse
   },
   {
     firstName: 'Grace',
@@ -158,8 +158,8 @@ const samples: BusinessCardData[] = [
     phone: '(646) 555-0112',
     website: 'bloomagency.com',
     social: { linkedin: 'graceobrien', twitter: 'bloomagency' },
-    logo: '/images/logos/bloom-agency.png',
-    portrait: '/images/portraits/grace-obrien.png',
+    logo: '/images/logos/bloom-agency.webp',
+    portrait: '/images/portraits/grace-obrien.webp',
   },
   {
     firstName: 'Hassan',
@@ -170,8 +170,8 @@ const samples: BusinessCardData[] = [
     email: 'hassan@elevationdesign.com',
     phone: '(202) 555-0156',
     website: 'elevationdesign.com',
-    logo: '/images/logos/elevation-design.png',
-    portrait: '/images/portraits/james-okafor.png',  // reuse
+    logo: '/images/logos/elevation-design.webp',
+    portrait: '/images/portraits/james-okafor.webp',  // reuse
   },
   {
     firstName: 'Sophie',
@@ -183,8 +183,8 @@ const samples: BusinessCardData[] = [
     website: 'serenitywellness.co',
     social: { instagram: 'sophiewellness' },
     tagline: 'Balance your body, elevate your mind',
-    logo: '/images/logos/serenity-wellness.png',
-    portrait: '/images/portraits/aisha-patel.png',  // reuse
+    logo: '/images/logos/serenity-wellness.webp',
+    portrait: '/images/portraits/aisha-patel.webp',  // reuse
   },
   {
     firstName: 'Jordan',
@@ -195,8 +195,8 @@ const samples: BusinessCardData[] = [
     phone: '(510) 555-0198',
     website: 'infracore.io',
     social: { github: 'jtaylor', linkedin: 'jordantaylor' },
-    logo: '/images/logos/infracore.png',
-    portrait: '/images/portraits/marcus-rodriguez.png',  // reuse
+    logo: '/images/logos/infracore.webp',
+    portrait: '/images/portraits/marcus-rodriguez.webp',  // reuse
   },
   {
     firstName: 'Victoria',
@@ -207,8 +207,8 @@ const samples: BusinessCardData[] = [
     phone: '(404) 555-0167',
     website: 'novakinteriors.com',
     social: { instagram: 'novakinteriors' },
-    logo: '/images/logos/novak-interiors.png',
-    portrait: '/images/portraits/victoria-novak.png',
+    logo: '/images/logos/novak-interiors.webp',
+    portrait: '/images/portraits/victoria-novak.webp',
   },
   {
     firstName: 'Michael',
@@ -220,8 +220,8 @@ const samples: BusinessCardData[] = [
     phone: '(212) 555-0245',
     website: 'brennancap.com',
     social: { linkedin: 'michaelbrennan' },
-    logo: '/images/logos/brennan-capital.png',
-    portrait: '/images/portraits/james-okafor.png',  // reuse
+    logo: '/images/logos/brennan-capital.webp',
+    portrait: '/images/portraits/james-okafor.webp',  // reuse
   },
   {
     firstName: 'Yuki',
@@ -232,8 +232,8 @@ const samples: BusinessCardData[] = [
     phone: '(213) 555-0178',
     website: 'studioyuki.com',
     social: { instagram: 'studioyuki', twitter: 'yukidesigns' },
-    logo: '/images/logos/soundwave-studios.png',  // reuse (music/creative)
-    portrait: '/images/portraits/yuki-tanaka.png',
+    logo: '/images/logos/soundwave-studios.webp',  // reuse (music/creative)
+    portrait: '/images/portraits/yuki-tanaka.webp',
   },
   {
     firstName: 'Robert',
@@ -244,8 +244,8 @@ const samples: BusinessCardData[] = [
     email: 'robert@apexeng.com',
     phone: '(713) 555-0156',
     website: 'apexeng.com',
-    logo: '/images/logos/infracore.png',  // reuse (engineering)
-    portrait: '/images/portraits/marcus-rodriguez.png',  // reuse
+    logo: '/images/logos/infracore.webp',  // reuse (engineering)
+    portrait: '/images/portraits/marcus-rodriguez.webp',  // reuse
   },
   {
     firstName: 'Priya',
@@ -256,8 +256,8 @@ const samples: BusinessCardData[] = [
     email: 'dr.sharma@sunshinepeds.com',
     phone: '(858) 555-0134',
     website: 'sunshinepeds.com',
-    logo: '/images/logos/metro-heart.png',  // reuse (medical)
-    portrait: '/images/portraits/aisha-patel.png',  // reuse
+    logo: '/images/logos/metro-heart.webp',  // reuse (medical)
+    portrait: '/images/portraits/aisha-patel.webp',  // reuse
   },
   {
     firstName: 'Alex',
@@ -268,8 +268,8 @@ const samples: BusinessCardData[] = [
     phone: '(310) 555-0190',
     website: 'soundwavestudios.com',
     social: { instagram: 'soundwavestudios', twitter: 'alexrivera' },
-    logo: '/images/logos/soundwave-studios.png',
-    portrait: '/images/portraits/carlos-mendez.png',  // reuse
+    logo: '/images/logos/soundwave-studios.webp',
+    portrait: '/images/portraits/carlos-mendez.webp',  // reuse
   },
   {
     firstName: 'Catherine',
@@ -280,8 +280,8 @@ const samples: BusinessCardData[] = [
     email: 'catherine@moorecpa.com',
     phone: '(469) 555-0112',
     website: 'moorecpa.com',
-    logo: '/images/logos/meridian-wealth.png',  // reuse (finance)
-    portrait: '/images/portraits/emily-whitfield.png',  // reuse
+    logo: '/images/logos/meridian-wealth.webp',  // reuse (finance)
+    portrait: '/images/portraits/emily-whitfield.webp',  // reuse
   },
   {
     firstName: 'Liam',
@@ -293,8 +293,8 @@ const samples: BusinessCardData[] = [
     website: 'heritagebrewing.com',
     tagline: 'Crafted with tradition',
     social: { instagram: 'heritagebrewing' },
-    logo: '/images/logos/heritage-brewing.png',
-    portrait: '/images/portraits/carlos-mendez.png',  // reuse
+    logo: '/images/logos/heritage-brewing.webp',
+    portrait: '/images/portraits/carlos-mendez.webp',  // reuse
   },
   {
     firstName: 'Diana',
@@ -305,8 +305,8 @@ const samples: BusinessCardData[] = [
     email: 'dr.vasquez@pawsclaws.vet',
     phone: '(602) 555-0189',
     website: 'pawsclaws.vet',
-    logo: '/images/logos/serenity-wellness.png',  // reuse (care/wellness)
-    portrait: '/images/portraits/victoria-novak.png',  // reuse
+    logo: '/images/logos/serenity-wellness.webp',  // reuse (care/wellness)
+    portrait: '/images/portraits/victoria-novak.webp',  // reuse
   },
 ];
 

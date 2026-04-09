@@ -16,6 +16,9 @@ dist-ssr
 dev-server.sh
 push.sh
 
+# Generated reports
+bcard-report.html
+
 # Font Awesome - only keep all.min.css and webfonts/
 public/fontawesome/svgs/
 public/fontawesome/js/

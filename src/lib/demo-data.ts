@@ -4,7 +4,7 @@ import { uuid } from './uuid';
 // Example QR code shown on demo profiles (has "EXAMPLE" watermark)
 export const EXAMPLE_QR_CODE = {
   type: 'image' as const,
-  imageDataUrl: '/images/qr-example.png',
+  imageDataUrl: '/images/qr-example.webp',
   fgColor: '#000000',
   bgColor: '#ffffff',
 };
