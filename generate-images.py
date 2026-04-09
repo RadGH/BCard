@@ -7,8 +7,26 @@ import base64
 import time
 import urllib.request
 import urllib.error
+from PIL import Image
+import io
 
-API_KEY = "REDACTED_OPENAI_KEY"
+def load_env(path):
+    """Load key=value pairs from a .env file into os.environ."""
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip())
+
+load_env(os.path.join(os.path.dirname(__file__), '.env.local'))
+
+API_KEY = os.environ.get("OPENAI_API_KEY", "")
+if not API_KEY:
+    raise RuntimeError("OPENAI_API_KEY not set. Add it to .env.local")
+
 OUTPUT_LOGOS = "/home/radgh/claude/bcard/public/images/logos"
 OUTPUT_PORTRAITS = "/home/radgh/claude/bcard/public/images/portraits"
 
@@ -26,8 +44,12 @@ def call_openai(payload):
     with urllib.request.urlopen(req, timeout=120) as resp:
         return json.loads(resp.read().decode('utf-8'))
 
-def download_url(url, path):
-    urllib.request.urlretrieve(url, path)
+def download_as_webp(url, out_path, quality=50):
+    """Download a PNG from url and save as WebP."""
+    with urllib.request.urlopen(url) as resp:
+        data = resp.read()
+    img = Image.open(io.BytesIO(data))
+    img.save(out_path, 'WEBP', quality=quality, method=6)
 
 def generate_logo(company, industry_hint, filename):
     out_path = os.path.join(OUTPUT_LOGOS, filename)
@@ -35,11 +57,11 @@ def generate_logo(company, industry_hint, filename):
         print(f"  [skip] {filename} already exists")
         return True
     prompt = (
-        f"A single minimalist flat vector logo for a company called '{company}'. "
+        f"A single minimalist flat vector logo mark for '{company}'. "
         f"{industry_hint}. "
-        "Simple geometric shapes, 2-3 colors maximum, clean modern design, "
-        "centered on white background, suitable for a business card. "
-        "NO text, NO grid, NO multiple versions, NO mockups — just ONE single logo mark."
+        "Solid flat colors only — no gradients, no shadows, no textures, no glow. "
+        "2 colors maximum. Simple bold geometric shape, centered on a plain white background. "
+        "NO text, NO letterforms, NO grid, NO multiple versions, NO mockups — exactly ONE logo mark."
     )
     print(f"  Generating logo: {filename} ({company})")
     try:
@@ -53,7 +75,7 @@ def generate_logo(company, industry_hint, filename):
             "response_format": "url",
         })
         url = result["data"][0]["url"]
-        download_url(url, out_path)
+        download_as_webp(url, out_path)
         print(f"  Saved: {filename}")
         time.sleep(1)
         return True
@@ -85,7 +107,7 @@ def generate_portrait(name, description, filename):
             "response_format": "url",
         })
         url = result["data"][0]["url"]
-        download_url(url, out_path)
+        download_as_webp(url, out_path, quality=70)
         print(f"  Saved: {filename}")
         time.sleep(1)
         return True
@@ -95,48 +117,56 @@ def generate_portrait(name, description, filename):
 
 # ─── Logos (20 companies from the 25 samples) ────────────────────────────────
 logos = [
-    ("Nexus Dynamics",        "tech startup, neural network nodes connected",           "nexus-dynamics.png"),
-    ("Vertex Labs",           "software engineering lab, code brackets or lambda",      "vertex-labs.png"),
-    ("Prism Studio",          "creative agency, triangular prism splitting light",       "prism-studio.png"),
-    ("Metro Heart Institute", "medical cardiology, abstract heart outline",              "metro-heart.png"),
-    ("Patel & Associates",    "law firm, scales of justice or column",                   "patel-associates.png"),
-    ("Summit Realty Group",   "real estate, mountain peak or house silhouette",          "summit-realty.png"),
-    ("Pixel & Flow",          "UX design agency, pixel grid flowing into curves",        "pixel-flow.png"),
-    ("Meridian Wealth",       "financial advisory, compass rose or growth line",         "meridian-wealth.png"),
-    ("CloudScale",            "cloud infrastructure SaaS, cloud with upward arrow",     "cloudscale.png"),
-    ("Tierra Restaurant",     "upscale restaurant, leaf or fork and spoon",              "tierra-restaurant.png"),
-    ("Foster Visuals",        "photography studio, abstract camera aperture",            "foster-visuals.png"),
-    ("Quantum Analytics",     "data science AI, abstract atom or data nodes",            "quantum-analytics.png"),
-    ("Bloom Agency",          "marketing agency, abstract flower bloom",                 "bloom-agency.png"),
-    ("Elevation Design Co.",  "architecture firm, abstract building elevation sketch",   "elevation-design.png"),
-    ("Serenity Wellness",     "wellness coaching, lotus flower or gentle wave",          "serenity-wellness.png"),
-    ("InfraCore",             "DevOps infrastructure, abstract server rack or circuit",  "infracore.png"),
-    ("Novak Interiors",       "interior design, abstract room corner or curved line",    "novak-interiors.png"),
-    ("Brennan Capital",       "investment firm, bold B monogram or abstract growth bar", "brennan-capital.png"),
-    ("Soundwave Studios",     "music production studio, stylized audio waveform",        "soundwave-studios.png"),
-    ("Heritage Brewing Co.",  "craft brewery, hop cone or barrel silhouette",            "heritage-brewing.png"),
+    ("Nexus Dynamics",        "tech startup, neural network nodes connected",           "nexus-dynamics.webp"),
+    ("Vertex Labs",           "software engineering lab, code brackets or lambda",      "vertex-labs.webp"),
+    ("Prism Studio",          "creative agency, triangular prism splitting light",       "prism-studio.webp"),
+    ("Metro Heart Institute", "medical cardiology, abstract heart outline",              "metro-heart.webp"),
+    ("Patel & Associates",    "law firm, scales of justice or column",                   "patel-associates.webp"),
+    ("Summit Realty Group",   "real estate, mountain peak or house silhouette",          "summit-realty.webp"),
+    ("Pixel & Flow",          "UX design agency, pixel grid flowing into curves",        "pixel-flow.webp"),
+    ("Meridian Wealth",       "financial advisory, compass rose or growth line",         "meridian-wealth.webp"),
+    ("CloudScale",            "cloud infrastructure SaaS, cloud with upward arrow",     "cloudscale.webp"),
+    ("Tierra Restaurant",     "upscale restaurant, leaf or fork and spoon",              "tierra-restaurant.webp"),
+    ("Foster Visuals",        "photography studio, abstract camera aperture",            "foster-visuals.webp"),
+    ("Quantum Analytics",     "data science AI, abstract atom or data nodes",            "quantum-analytics.webp"),
+    ("Bloom Agency",          "marketing agency, abstract flower bloom",                 "bloom-agency.webp"),
+    ("Elevation Design Co.",  "architecture firm, bold abstract building silhouette or single arch shape", "elevation-design.webp"),
+    ("Serenity Wellness",     "wellness coaching, lotus flower or gentle wave",          "serenity-wellness.webp"),
+    ("InfraCore",             "DevOps infrastructure, abstract server rack or circuit",  "infracore.webp"),
+    ("Novak Interiors",       "interior design, abstract room corner or curved line",    "novak-interiors.webp"),
+    ("Brennan Capital",       "investment firm, bold B monogram or abstract growth bar", "brennan-capital.webp"),
+    ("Soundwave Studios",     "music production studio, stylized audio waveform",        "soundwave-studios.webp"),
+    ("Heritage Brewing Co.",  "craft brewery, hop cone or barrel silhouette",            "heritage-brewing.webp"),
 ]
 
 # ─── Portraits (10 people from the 25 samples) ───────────────────────────────
 portraits = [
-    ("Sarah Chen",       "a professional Asian woman in her 30s, CEO, wearing a sharp blazer",                   "sarah-chen.png"),
-    ("Marcus Rodriguez", "a professional Latino man in his late 20s, software engineer, smart-casual attire",    "marcus-rodriguez.png"),
-    ("Emily Whitfield",  "a creative professional white woman in her 30s, creative director, stylish attire",    "emily-whitfield.png"),
-    ("Dr. James Okafor", "a professional Black man in his 40s, doctor, wearing a white coat or suit",             "james-okafor.png"),
-    ("Aisha Patel",      "a professional South Asian woman in her 30s, attorney, formal business suit",          "aisha-patel.png"),
-    ("Luna Bergstrom",   "a professional Scandinavian woman in her late 20s, UX designer, modern casual",        "luna-bergstrom.png"),
-    ("Carlos Mendez",    "a professional Latino man in his 40s, chef, wearing chef whites or smart attire",      "carlos-mendez.png"),
-    ("Grace O'Brien",    "a professional Irish woman in her 30s, marketing director, professional attire",        "grace-obrien.png"),
-    ("Victoria Novak",   "a professional Eastern European woman in her 30s, interior designer, elegant attire",  "victoria-novak.png"),
-    ("Yuki Tanaka",      "a professional Japanese person in their late 20s, graphic designer, creative attire",  "yuki-tanaka.png"),
+    ("Sarah Chen",       "a professional Asian woman in her 30s, CEO, wearing a sharp blazer",                   "sarah-chen.webp"),
+    ("Marcus Rodriguez", "a professional Latino man in his late 20s, software engineer, smart-casual attire",    "marcus-rodriguez.webp"),
+    ("Emily Whitfield",  "a creative professional white woman in her 30s, creative director, stylish attire",    "emily-whitfield.webp"),
+    ("Dr. James Okafor", "a professional Black man in his 40s, doctor, wearing a white coat or suit",            "james-okafor.webp"),
+    ("Aisha Patel",      "a professional South Asian woman in her 30s, attorney, formal business suit",          "aisha-patel.webp"),
+    ("Luna Bergstrom",   "a professional Scandinavian woman in her late 20s, UX designer, modern casual",        "luna-bergstrom.webp"),
+    ("Carlos Mendez",    "a professional Latino man in his 40s, chef, wearing chef whites or smart attire",      "carlos-mendez.webp"),
+    ("Grace O'Brien",    "a professional Irish woman in her 30s, marketing director, professional attire",       "grace-obrien.webp"),
+    ("Victoria Novak",   "a professional Eastern European woman in her 30s, interior designer, elegant attire",  "victoria-novak.webp"),
+    ("Yuki Tanaka",      "a professional Japanese person in their late 20s, graphic designer, creative attire",  "yuki-tanaka.webp"),
 ]
 
-print("=== Generating Logos ===")
-for company, hint, fname in logos:
-    generate_logo(company, hint, fname)
+if __name__ == "__main__":
+    import sys
+    only = sys.argv[1] if len(sys.argv) > 1 else None
 
-print("\n=== Generating Portraits ===")
-for name, desc, fname in portraits:
-    generate_portrait(name, desc, fname)
+    print("=== Generating Logos ===")
+    for company, hint, fname in logos:
+        if only and only not in fname:
+            continue
+        generate_logo(company, hint, fname)
 
-print("\nDone!")
+    print("\n=== Generating Portraits ===")
+    for name, desc, fname in portraits:
+        if only and only not in fname:
+            continue
+        generate_portrait(name, desc, fname)
+
+    print("\nDone!")
