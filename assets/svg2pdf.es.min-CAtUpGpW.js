@@ -1,0 +1,1 @@
+import{t as e}from"./svg2pdf-rmmeDFfN.js";export{e as svg2pdf};
