@@ -76,7 +76,7 @@ export default function MoreLayouts({ design, data, onLayoutChange, useBranding,
             <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">
               {categoryNames[category] ?? category}
             </h4>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {layouts.map(layout => {
                 const layoutPalette = brandingOn
                   ? palette
