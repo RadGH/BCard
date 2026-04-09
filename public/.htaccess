@@ -1,0 +1,15 @@
+# MIME types for module scripts and assets
+<IfModule mod_mime.c>
+    AddType application/javascript .js .mjs
+    AddType text/css              .css
+    AddType image/webp            .webp
+    AddType image/svg+xml         .svg
+    AddType application/json      .json
+</IfModule>
+
+# SPA fallback — serve index.html for any path that isn't a real file
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

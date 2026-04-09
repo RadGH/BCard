@@ -4,9 +4,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  // Production builds are served under /bcard/ on the releases server.
-  // Dev server runs at root so no base is needed there.
-  base: process.env.NODE_ENV === 'production' ? '/bcard/' : '/',
+  // VITE_BASE overrides the base path (default '/' for production deploys like Cloudways).
+  // The local releases server sets VITE_BASE=/bcard/ via the release script.
+  base: process.env.VITE_BASE ?? '/',
   plugins: [react(), tailwindcss()],
   server: {
     allowedHosts: true,
