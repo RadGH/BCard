@@ -344,6 +344,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                 updateField={updateField}
                 updateSocial={updateSocial}
                 updateAddress={updateAddress}
+                iconStyle={design.iconStyle}
+                onIconStyleChange={v => updateDesign({ iconStyle: v })}
               />
             )}
             {activeTab === 'images' && (
@@ -439,6 +441,8 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                 onDesignChange={updateDesign}
                 side={advancedSide}
                 onSideChange={setAdvancedSide}
+                data={data}
+                onDataChange={setData}
               />
             )}
             {activeTab === 'export' && (

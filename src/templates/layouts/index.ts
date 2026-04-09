@@ -2059,6 +2059,1550 @@ const groupG: FrontLayout[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// GROUP N — New layouts fl-n001..fl-n100
+// ─────────────────────────────────────────────────────────────────────────────
+
+const groupN: FrontLayout[] = [
+  // fl-n001 — text-only, name top-left, contact bottom-left, social bottom-right
+  {
+    id: 'fl-n001',
+    category: 'text-only',
+    name: 'Corner Split',
+    description: 'Name anchored top-left, contact bottom-left, social bottom-right',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,            width: SW * 0.65, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,            y: SY + SH - 14,  width: SW * 0.55, height: 14, align: 'left',  verticalAlign: 'bottom' },
+      { name: 'social',       x: SX + SW * 0.6, y: SY + SH - 10,  width: SW * 0.4,  height: 10, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n002 — text-only, fully right-bottom anchored
+  {
+    id: 'fl-n002',
+    category: 'text-only',
+    name: 'Bottom Right Stack',
+    description: 'All content anchored to the bottom-right corner',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY + SH - 36, width: SW, height: 16, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + SH - 18, width: SW, height: 10, align: 'right', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + SH - 8,  width: SW, height: 8,  align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n003 — text-only, diagonal-feel: name top-right, contact middle-left
+  {
+    id: 'fl-n003',
+    category: 'text-only',
+    name: 'Diagonal Flow',
+    description: 'Name top-right, contact center-left, social bottom-center',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX + SW * 0.35, y: SY,            width: SW * 0.65, height: 16, align: 'right',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,             y: SY + SH * 0.3, width: SW * 0.6,  height: 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'social',       x: SX,             y: SY + SH - 9,   width: SW,        height: 9,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n004 — text-only, name centered large, contact centered small below
+  {
+    id: 'fl-n004',
+    category: 'text-only',
+    name: 'Center Monogram',
+    description: 'Name large and centered, all details centered beneath',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY + 4,  width: SW, height: 20, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 26, width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 37, width: SW, height: 7,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n005 — text-only, name left top, social left middle, contact right
+  {
+    id: 'fl-n005',
+    category: 'text-only',
+    name: 'Left Stack Right Contact',
+    description: 'Name and social stacked left; contact info column right',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,      width: SW * 0.45, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX,             y: SY + 18, width: SW * 0.45, height: 10, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + SW * 0.5,  y: SY,      width: SW * 0.5,  height: SH, align: 'left', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n006 — logo, logo top-left, name-title right of logo, contact below
+  {
+    id: 'fl-n006',
+    category: 'logo',
+    name: 'Logo Banner Left',
+    description: 'Logo top-left, name beside it, contact info below full-width',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,            y: SY,      width: 20,        height: 16, align: 'left',  verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 22,       y: SY,      width: SW - 22,   height: 16, align: 'left',  verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,            y: SY + 20, width: SW * 0.65, height: 14, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.7, y: SY + 20, width: SW * 0.3,  height: 14, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n007 — logo, logo bottom-right, name top, contact left
+  {
+    id: 'fl-n007',
+    category: 'logo',
+    name: 'Logo Corner Accent',
+    description: 'Name dominant top; contact left; logo anchored bottom-right',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,           width: SW * 0.7, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,            y: SY + 20,      width: SW * 0.6, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX,            y: SY + SH - 8,  width: SW * 0.6, height: 8,  align: 'left',  verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW - 18,  y: SY + SH - 18, width: 18,       height: 18, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n008 — logo, centered logo top, name center, contact center bottom
+  {
+    id: 'fl-n008',
+    category: 'logo',
+    name: 'Logo Top Center',
+    description: 'Logo centered at top, name beneath, contact at bottom centered',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'logo',         x: SX, y: SY,      width: SW, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 16, width: SW, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 32, width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n009 — logo, logo left sidebar feel, text right
+  {
+    id: 'fl-n009',
+    category: 'logo',
+    name: 'Logo Sidebar',
+    description: 'Logo stacked in left quarter; name and contact fill right three-quarters',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'logo',         x: SX,             y: SY, width: SW * 0.22, height: SH,       align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + SW * 0.28, y: SY, width: SW * 0.72, height: SH * 0.5, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'contact-info', x: SX + SW * 0.28, y: SY + SH * 0.52, width: SW * 0.72, height: SH * 0.48, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n010 — logo-qr, logo top-left, qr top-right, name/contact below
+  {
+    id: 'fl-n010',
+    category: 'logo-qr',
+    name: 'Logo QR Header',
+    description: 'Logo and QR bookend the top; name and contact fill the bottom half',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY,      width: 18,       height: 18, align: 'left',   verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 18, y: SY,      width: 18,       height: 18, align: 'right',  verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,           y: SY + 20, width: SW,       height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 36, width: SW,       height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n011 — logo-qr, logo bottom-left, qr bottom-right, name fills top
+  {
+    id: 'fl-n011',
+    category: 'logo-qr',
+    name: 'Logo QR Footer',
+    description: 'Name and contact dominate top; logo and QR anchor the bottom corners',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW,  height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 18,      width: SW,  height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'logo',         x: SX,           y: SY + SH - 14, width: 20,  height: 14, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX + SW - 14, y: SY + SH - 14, width: 14, height: 14, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n012 — qr-code, QR left, name+contact right
+  {
+    id: 'fl-n012',
+    category: 'qr-code',
+    name: 'QR Left Panel',
+    description: 'Large QR on the left; name and contact stack on the right',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'qr-code',      x: SX,            y: SY + (SH - 30) / 2, width: 30, height: 30, align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 34,       y: SY,                  width: SW - 34, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 34,       y: SY + SH * 0.5,       width: SW - 34, height: 18, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n013 — qr-code, QR right, name left
+  {
+    id: 'fl-n013',
+    category: 'qr-code',
+    name: 'QR Right Panel',
+    description: 'QR code right side; name and contact fill left two-thirds',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,                  width: SW - 34, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + SH * 0.5,       width: SW - 34, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 30, y: SY + (SH - 30) / 2,  width: 30,      height: 30, align: 'center', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n014 — portrait, portrait left, text right
+  {
+    id: 'fl-n014',
+    category: 'portrait',
+    name: 'Portrait Left Text Right',
+    description: 'Square portrait on left; name and contact info fill right side',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'portrait',     x: SX,            y: SY,      width: 30,      height: SH,      align: 'center', verticalAlign: 'middle', clipShape: 'rect' },
+      { name: 'name-title',   x: SX + 34,       y: SY,      width: SW - 34, height: 22,      align: 'left',   verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 34,       y: SY + 24, width: SW - 34, height: SH - 24, align: 'left',   verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n015 — portrait, portrait top-right circle, name left
+  {
+    id: 'fl-n015',
+    category: 'portrait',
+    name: 'Circle Portrait Top Right',
+    description: 'Circular portrait top-right; name and contact fill left and bottom',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,      width: SW * 0.6, height: 22, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 24, width: SW * 0.7, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 22, y: SY,      width: 22,       height: 22, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n016 — portrait, portrait bottom-left, name top-right
+  {
+    id: 'fl-n016',
+    category: 'portrait',
+    name: 'Portrait Bottom Left',
+    description: 'Name and contact top-right; portrait anchored bottom-left',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX + SW * 0.3, y: SY,           width: SW * 0.7, height: 20, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + SW * 0.3, y: SY + 22,      width: SW * 0.7, height: 16, align: 'right', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,             y: SY + SH - 24, width: 24,       height: 24, align: 'left',  verticalAlign: 'bottom', clipShape: 'rounded' },
+    ],
+  },
+
+  // fl-n017 — portrait-qr, portrait left, qr right, name/contact center
+  {
+    id: 'fl-n017',
+    category: 'portrait-qr',
+    name: 'Portrait QR Bookend',
+    description: 'Portrait left, QR right, name and contact centered between them',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'portrait',     x: SX,           y: SY + (SH - 28) / 2, width: 26, height: 28, align: 'center', verticalAlign: 'middle', clipShape: 'circle' },
+      { name: 'name-title',   x: SX + 30,      y: SY,                  width: SW - 60, height: 22, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 30,      y: SY + SH * 0.5,       width: SW - 60, height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 26, y: SY + (SH - 26) / 2,  width: 26,      height: 26, align: 'center', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n018 — logo-portrait, logo top-left, portrait top-right, text below
+  {
+    id: 'fl-n018',
+    category: 'logo-portrait',
+    name: 'Logo Portrait Top Row',
+    description: 'Logo top-left, portrait circle top-right, name and contact fill bottom',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY,      width: 18,       height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'portrait',     x: SX + SW - 18, y: SY,      width: 18,       height: 18, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'name-title',   x: SX,           y: SY + 22, width: SW * 0.7, height: 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 38, width: SW,       height: 8,  align: 'left',   verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n019 — text-only, name fills top half, contact tiny bottom strip
+  {
+    id: 'fl-n019',
+    category: 'text-only',
+    name: 'Name Hero',
+    description: 'Name dominates the upper half; small contact strip at the bottom',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,           width: SW, height: SH * 0.55, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX, y: SY + SH * 0.6, width: SW * 0.6, height: SH * 0.4, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.65, y: SY + SH * 0.6, width: SW * 0.35, height: SH * 0.4, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n020 — text-only, three even horizontal bands
+  {
+    id: 'fl-n020',
+    category: 'text-only',
+    name: 'Three Band',
+    description: 'Card divided into three equal horizontal bands: name, contact, social',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,                   width: SW, height: SH / 3 - 1, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX, y: SY + SH / 3 + 1,      width: SW, height: SH / 3 - 1, align: 'center', verticalAlign: 'middle' },
+      { name: 'social',       x: SX, y: SY + (SH / 3) * 2 + 1, width: SW, height: SH / 3 - 1, align: 'center', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n021 — logo, logo centered large, name below
+  {
+    id: 'fl-n021',
+    category: 'logo',
+    name: 'Logo Dominant Center',
+    description: 'Large centered logo takes the top; compact name and contact below',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'logo',         x: SX, y: SY,      width: SW, height: 20, align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX, y: SY + 22, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 36, width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n022 — logo, logo right, name+contact left
+  {
+    id: 'fl-n022',
+    category: 'logo',
+    name: 'Logo Right Column',
+    description: 'Logo fills right quarter; name and contact stack left',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,      width: SW * 0.65, height: 20, align: 'left',   verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,            y: SY + 22, width: SW * 0.65, height: 16, align: 'left',   verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW * 0.7, y: SY,      width: SW * 0.3,  height: SH, align: 'center', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n023 — qr-code, QR centered bottom, name top
+  {
+    id: 'fl-n023',
+    category: 'qr-code',
+    name: 'QR Bottom Center',
+    description: 'Name and contact in the top two-thirds; QR centered at the bottom',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,                     width: SW,  height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 20,                 width: SW,  height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + (SW - 16) / 2, y: SY + SH - 16, width: 16, height: 16, align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n024 — portrait, full-bleed portrait right half, text left
+  {
+    id: 'fl-n024',
+    category: 'portrait',
+    name: 'Portrait Half Panel',
+    description: 'Portrait fills the entire right half; name and contact on the left',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW * 0.48, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX, y: SY + 22, width: SW * 0.48, height: SH - 22, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW * 0.52, y: 0, width: W - SX - SW * 0.52, height: H, align: 'center', verticalAlign: 'middle', clipShape: 'rect' },
+    ],
+  },
+
+  // fl-n025 — portrait-qr, portrait top-left, qr bottom-right, name right, contact bottom-left
+  {
+    id: 'fl-n025',
+    category: 'portrait-qr',
+    name: 'Portrait QR Diagonal',
+    description: 'Portrait top-left, QR bottom-right, name top-right, contact bottom-left',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'portrait',     x: SX,           y: SY,           width: 22,       height: 22, align: 'center', verticalAlign: 'top',    clipShape: 'circle' },
+      { name: 'name-title',   x: SX + 24,      y: SY,           width: SW - 24,  height: 22, align: 'right',  verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + 24,      width: SW - 18,  height: 18, align: 'left',   verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 16, y: SY + SH - 16, width: 16,       height: 16, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n026 — logo-portrait, logo bottom-right, portrait circle left, name top
+  {
+    id: 'fl-n026',
+    category: 'logo-portrait',
+    name: 'Portrait Left Logo Right',
+    description: 'Portrait circle on left, logo bottom-right, name and contact fill center',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'portrait',     x: SX,            y: SY + (SH - 24) / 2, width: 24, height: 24, align: 'center', verticalAlign: 'middle', clipShape: 'circle' },
+      { name: 'name-title',   x: SX + 28,       y: SY,                  width: SW - 28, height: 18, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 28,       y: SY + 20,             width: SW - 46, height: 14, align: 'left', verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW - 16,  y: SY + SH - 16,        width: 16, height: 16, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n027 — text-only, name top center, contact split left/right below
+  {
+    id: 'fl-n027',
+    category: 'text-only',
+    name: 'Top Center Split',
+    description: 'Name centered at top; contact and social split into two equal columns below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,      width: SW,       height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,             y: SY + 20, width: SW * 0.48, height: 22, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.52, y: SY + 20, width: SW * 0.48, height: 22, align: 'left',  verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n028 — logo-qr, logo center, qr bottom-right, name top, contact mid
+  {
+    id: 'fl-n028',
+    category: 'logo-qr',
+    name: 'Logo Center QR Corner',
+    description: 'Name top-left, logo centered, contact below logo, QR bottom-right',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW * 0.6, height: 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'logo',         x: SX,           y: SY + 16,      width: SW,       height: 14, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + 32,      width: SW - 18,  height: 10, align: 'left',   verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 16, y: SY + SH - 16, width: 16,       height: 16, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n029 — text-only, sparse luxury: name only top, one contact line bottom
+  {
+    id: 'fl-n029',
+    category: 'text-only',
+    name: 'Minimal Luxury',
+    description: 'Very sparse: large name top-left, single contact line bottom-left',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,          width: SW,       height: 20, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + SH - 8, width: SW * 0.7, height: 8,  align: 'left', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n030 — logo, logo top-right, name bottom-left
+  {
+    id: 'fl-n030',
+    category: 'logo',
+    name: 'Logo Top Right Name Bottom',
+    description: 'Logo anchored top-right; name and contact fill lower-left',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'logo',         x: SX + SW - 20, y: SY,           width: 20,      height: 16, align: 'right', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,           y: SY + SH - 24, width: SW * 0.7, height: 16, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + SH - 8,  width: SW * 0.7, height: 8,  align: 'left',  verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n031 — portrait, portrait full-left strip, name+contact right
+  {
+    id: 'fl-n031',
+    category: 'portrait',
+    name: 'Portrait Strip Left',
+    description: 'Tall portrait strip on left edge; name and contact on right',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'portrait',     x: 0,       y: 0,  width: SX + 20, height: H, align: 'center', verticalAlign: 'middle', clipShape: 'rect' },
+      { name: 'name-title',   x: SX + 24, y: SY, width: SW - 24, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 24, y: SY + 22, width: SW - 24, height: SH - 22, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n032 — text-only, name right-aligned large, contact left small
+  {
+    id: 'fl-n032',
+    category: 'text-only',
+    name: 'Name Right Contact Left',
+    description: 'Large name right-aligned; contact details left-aligned opposite',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'contact-info', x: SX,             y: SY,      width: SW * 0.4,  height: SH, align: 'left',  verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + SW * 0.45, y: SY,      width: SW * 0.55, height: SH, align: 'right', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n033 — logo-qr, logo left, qr right, name center top, contact center bottom
+  {
+    id: 'fl-n033',
+    category: 'logo-qr',
+    name: 'Logo QR Flanking',
+    description: 'Logo and QR flank the sides; name and contact centered between them',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY + (SH - 16) / 2, width: 18, height: 16, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 22,      y: SY,                  width: SW - 46, height: 22, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 22,      y: SY + SH * 0.52,      width: SW - 46, height: SH * 0.48, align: 'center', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 20, y: SY + (SH - 20) / 2,  width: 20, height: 20, align: 'right',  verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n034 — portrait-qr, portrait and QR both bottom, name top
+  {
+    id: 'fl-n034',
+    category: 'portrait-qr',
+    name: 'Portrait QR Bottom Row',
+    description: 'Name and contact at top; portrait circle and QR side by side at bottom',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW,  height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 20,      width: SW,  height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,           y: SY + SH - 18, width: 18,  height: 18, align: 'center', verticalAlign: 'bottom', clipShape: 'circle' },
+      { name: 'qr-code',      x: SX + 22,      y: SY + SH - 16, width: 16,  height: 16, align: 'left',   verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n035 — logo-portrait, portrait right circle, logo top-left inline with name
+  {
+    id: 'fl-n035',
+    category: 'logo-portrait',
+    name: 'Logo Inline Portrait Right',
+    description: 'Logo beside name top-left; portrait circle anchored center-right',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'logo',         x: SX,            y: SY,                  width: 14,       height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 16,       y: SY,                  width: SW * 0.5, height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,            y: SY + 18,             width: SW * 0.65, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 22,  y: SY + (SH - 24) / 2,  width: 22,       height: 24, align: 'center', verticalAlign: 'middle', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n036 — text-only, tagline slot below name
+  {
+    id: 'fl-n036',
+    category: 'text-only',
+    name: 'Tagline Row',
+    description: 'Name top, tagline directly below, contact and social at the bottom',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW, height: 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'tagline',      x: SX, y: SY + 16, width: SW, height: 8,  align: 'left',   verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 26, width: SW * 0.55, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.6, y: SY + 26, width: SW * 0.4, height: 16, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n037 — logo, logo top-center, name centered below, contact bottom
+  {
+    id: 'fl-n037',
+    category: 'logo',
+    name: 'Centered Stacked Logo',
+    description: 'Logo, name, and contact all centered in a clean vertical stack',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'logo',         x: SX, y: SY,      width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 14, width: SW, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 32, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n038 — qr-code, QR top-left, name right, contact below QR and name
+  {
+    id: 'fl-n038',
+    category: 'qr-code',
+    name: 'QR Top Left',
+    description: 'QR code top-left; name right of QR; contact spans full width below',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'qr-code',      x: SX,       y: SY,      width: 20, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + 24,  y: SY,      width: SW - 24, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,       y: SY + 24, width: SW,      height: 18, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n039 — portrait-qr, portrait right, qr left, name+contact center
+  {
+    id: 'fl-n039',
+    category: 'portrait-qr',
+    name: 'QR Left Portrait Right',
+    description: 'QR code left side, portrait right side, name and contact in the middle',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'qr-code',      x: SX,           y: SY + (SH - 24) / 2,  width: 22, height: 24, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 26,      y: SY,                   width: SW - 52, height: 20, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 26,      y: SY + SH * 0.5,        width: SW - 52, height: SH * 0.5, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 24, y: SY + (SH - 26) / 2,   width: 24, height: 26, align: 'center', verticalAlign: 'middle', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n040 — text-only, name bottom-center large
+  {
+    id: 'fl-n040',
+    category: 'text-only',
+    name: 'Name Anchored Bottom',
+    description: 'Contact at the top; large name anchored to the bottom center',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'contact-info', x: SX, y: SY,           width: SW,       height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 16,      width: SW,       height: 8,  align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + SH - 14, width: SW,       height: 14, align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n041 — logo-qr, logo inline with name, qr top-right
+  {
+    id: 'fl-n041',
+    category: 'logo-qr',
+    name: 'Logo Name Inline QR Corner',
+    description: 'Logo and name inline on left; QR top-right; contact below',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY,      width: 16,      height: 14, align: 'left',  verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 18,      y: SY,      width: SW - 36, height: 14, align: 'left',  verticalAlign: 'middle' },
+      { name: 'qr-code',      x: SX + SW - 16, y: SY,      width: 16,      height: 16, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 18, width: SW,      height: 24, align: 'left',  verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n042 — text-only, credentials region
+  {
+    id: 'fl-n042',
+    category: 'text-only',
+    name: 'Credentials Bar',
+    description: 'Name top, credentials strip, contact and social at bottom',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW, height: 14, align: 'left', verticalAlign: 'top' },
+      { name: 'credentials',  x: SX, y: SY + 16, width: SW, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 26, width: SW * 0.55, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.6, y: SY + 26, width: SW * 0.4, height: 16, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n043 — logo, logo bottom-center, name top
+  {
+    id: 'fl-n043',
+    category: 'logo',
+    name: 'Logo Bottom Center',
+    description: 'Name at top, contact center, logo anchored bottom-center',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,                          width: SW, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 18,                     width: SW, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'logo',         x: SX + (SW - 20) / 2, y: SY + SH - 14, width: 20, height: 14, align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n044 — portrait, portrait top-left square, name below portrait, contact right
+  {
+    id: 'fl-n044',
+    category: 'portrait',
+    name: 'Portrait Square Top Left',
+    description: 'Square portrait top-left, name stacked below it, contact fills right side',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'portrait',     x: SX,            y: SY,      width: 24, height: 24, align: 'left',  verticalAlign: 'top',    clipShape: 'rect' },
+      { name: 'name-title',   x: SX,            y: SY + 26, width: 24, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 28,       y: SY,      width: SW - 28, height: SH, align: 'left', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n045 — text-only, wide name center, contact below in two micro-columns
+  {
+    id: 'fl-n045',
+    category: 'text-only',
+    name: 'Wide Name Micro Columns',
+    description: 'Full-width centered name; contact splits into two tight micro-columns below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,      width: SW,        height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,             y: SY + 22, width: SW * 0.46, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.52, y: SY + 22, width: SW * 0.48, height: 20, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n046 — logo-portrait, logo center-top, portrait bottom-center
+  {
+    id: 'fl-n046',
+    category: 'logo-portrait',
+    name: 'Logo Top Portrait Bottom',
+    description: 'Logo centered at top, name in center, portrait circle anchored at bottom',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'logo',         x: SX, y: SY,                         width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 14,                    width: SW, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 30,                    width: SW - 22, height: 10, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 18, y: SY + SH - 18,     width: 18, height: 18, align: 'right', verticalAlign: 'bottom', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n047 — qr-code, QR top-right, name+contact left
+  {
+    id: 'fl-n047',
+    category: 'qr-code',
+    name: 'QR Top Right',
+    description: 'Large QR code top-right; name and contact fill the left side',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,      width: SW - 24, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + 22, width: SW - 24, height: 20, align: 'left', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 22, y: SY,      width: 22,      height: 22, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n048 — text-only, name vertical text effect (rotated region is not supported, so tall narrow left + wide right)
+  {
+    id: 'fl-n048',
+    category: 'text-only',
+    name: 'Narrow Left Wide Right',
+    description: 'Very narrow name column on the left; wide contact block on the right',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY, width: SW * 0.28, height: SH, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + SW * 0.33, y: SY, width: SW * 0.67, height: SH * 0.6, align: 'left', verticalAlign: 'middle' },
+      { name: 'social',       x: SX + SW * 0.33, y: SY + SH * 0.65, width: SW * 0.67, height: SH * 0.35, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n049 — logo, logo left inline, name right, contact full width below
+  {
+    id: 'fl-n049',
+    category: 'logo',
+    name: 'Logo Inline Full Contact',
+    description: 'Logo and name share the top row inline; contact spans full width below',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,       y: SY,      width: 16,      height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 18,  y: SY,      width: SW - 18, height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,       y: SY + 16, width: SW,      height: SH - 16, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n050 — portrait-qr, all four corners used
+  {
+    id: 'fl-n050',
+    category: 'portrait-qr',
+    name: 'Four Corner Elements',
+    description: 'Portrait top-left, QR top-right, name bottom-left, contact bottom-right',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'portrait',     x: SX,           y: SY,           width: 20, height: 20, align: 'left',  verticalAlign: 'top',    clipShape: 'circle' },
+      { name: 'qr-code',      x: SX + SW - 18, y: SY,           width: 18, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,           y: SY + SH - 16, width: SW * 0.55, height: 16, align: 'left',  verticalAlign: 'bottom' },
+      { name: 'contact-info', x: SX + SW * 0.6, y: SY + SH - 16, width: SW * 0.4, height: 16, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n051 — text-only, name enormous fills top 60%
+  {
+    id: 'fl-n051',
+    category: 'text-only',
+    name: 'Giant Name',
+    description: 'Name renders very large filling the top; minimal contact below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,            width: SW, height: SH * 0.58, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX, y: SY + SH * 0.62, width: SW * 0.7, height: SH * 0.38, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n052 — logo, logo right aligned top, name below logo, contact left
+  {
+    id: 'fl-n052',
+    category: 'logo',
+    name: 'Logo Stack Right',
+    description: 'Logo and name stacked right; contact fills left side',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'contact-info', x: SX,            y: SY, width: SW * 0.5, height: SH, align: 'left',  verticalAlign: 'middle' },
+      { name: 'logo',         x: SX + SW * 0.55, y: SY, width: SW * 0.45, height: 16, align: 'right', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + SW * 0.55, y: SY + 18, width: SW * 0.45, height: SH - 18, align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n053 — portrait, portrait centered large, name below
+  {
+    id: 'fl-n053',
+    category: 'portrait',
+    name: 'Portrait Center Stage',
+    description: 'Large portrait dominates the card center; name and contact below',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'portrait',     x: SX + (SW - 28) / 2, y: SY,      width: 28, height: 28, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'name-title',   x: SX, y: SY + 30,                  width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 42,                  width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n054 — logo-qr, all three elements in a row
+  {
+    id: 'fl-n054',
+    category: 'logo-qr',
+    name: 'Three Element Top Row',
+    description: 'Logo, name, and QR in a horizontal top row; contact below full-width',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY,      width: 16,      height: 14, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 18,      y: SY,      width: SW - 38, height: 14, align: 'center', verticalAlign: 'middle' },
+      { name: 'qr-code',      x: SX + SW - 18, y: SY,      width: 18,      height: 18, align: 'right',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 20, width: SW,      height: 22, align: 'left',   verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n055 — text-only, name right, contact left, both vertically centered
+  {
+    id: 'fl-n055',
+    category: 'text-only',
+    name: 'Mirrored Columns',
+    description: 'Contact left-column, name right-column, both vertically centered',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'contact-info', x: SX,             y: SY, width: SW * 0.46, height: SH, align: 'left',  verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + SW * 0.52, y: SY, width: SW * 0.48, height: SH, align: 'right', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n056 — logo-portrait, logo bottom-left, portrait top-right, name center
+  {
+    id: 'fl-n056',
+    category: 'logo-portrait',
+    name: 'Logo Bottom Left Portrait Top Right',
+    description: 'Logo anchors bottom-left, portrait top-right, name and contact center',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'portrait',     x: SX + SW - 20, y: SY,           width: 20, height: 20, align: 'right', verticalAlign: 'top',    clipShape: 'circle' },
+      { name: 'name-title',   x: SX,           y: SY + 4,       width: SW - 24, height: 14, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 20,      width: SW - 24, height: 18, align: 'left', verticalAlign: 'top' },
+      { name: 'logo',         x: SX,           y: SY + SH - 14, width: 16,      height: 14, align: 'left', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n057 — qr-code, QR bottom-left, name top-right
+  {
+    id: 'fl-n057',
+    category: 'qr-code',
+    name: 'QR Bottom Left',
+    description: 'Name and contact fill the upper right; QR anchored bottom-left',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX + 22,      y: SY,           width: SW - 22, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 22,      y: SY + 20,      width: SW - 22, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX,           y: SY + SH - 20, width: 20,      height: 20, align: 'left',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n058 — text-only, social top, name middle, contact bottom
+  {
+    id: 'fl-n058',
+    category: 'text-only',
+    name: 'Inverted Stack',
+    description: 'Social handles at top; name in the middle; contact at the bottom',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'social',       x: SX, y: SY,      width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 12, width: SW, height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 32, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n059 — logo, logo left tall, name+contact right two rows
+  {
+    id: 'fl-n059',
+    category: 'logo',
+    name: 'Logo Tall Left',
+    description: 'Tall logo panel on left; name and contact in two rows on right',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,             y: SY, width: SW * 0.2, height: SH, align: 'center', verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + SW * 0.25, y: SY, width: SW * 0.75, height: SH * 0.5, align: 'left', verticalAlign: 'bottom' },
+      { name: 'contact-info', x: SX + SW * 0.25, y: SY + SH * 0.52, width: SW * 0.75, height: SH * 0.48, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n060 — portrait-qr, name+contact top, portrait bottom-left circle, qr bottom-right
+  {
+    id: 'fl-n060',
+    category: 'portrait-qr',
+    name: 'Content Top Assets Bottom',
+    description: 'Name and contact fill top; portrait and QR share the bottom',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW, height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 20,      width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,           y: SY + SH - 16, width: 16, height: 16, align: 'left',   verticalAlign: 'bottom', clipShape: 'circle' },
+      { name: 'qr-code',      x: SX + 20,      y: SY + SH - 16, width: 14, height: 14, align: 'left',   verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n061 — text-only, all centered with generous spacing
+  {
+    id: 'fl-n061',
+    category: 'text-only',
+    name: 'Generous Centered',
+    description: 'All elements centered with deliberate white space between them',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY + 2,  width: SW, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 24, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 40, width: SW, height: 6,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n062 — logo-qr, logo and qr inline bottom, name top
+  {
+    id: 'fl-n062',
+    category: 'logo-qr',
+    name: 'Name Top Logo QR Bottom',
+    description: 'Large name at top; logo and QR code sit side by side at the bottom',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX,      y: SY,           width: SW, height: 18, align: 'left',   verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,      y: SY + 20,      width: SW, height: 12, align: 'left',   verticalAlign: 'top' },
+      { name: 'logo',         x: SX,      y: SY + SH - 14, width: 16, height: 14, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX + 20, y: SY + SH - 16, width: 16, height: 16, align: 'left',   verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n063 — portrait, portrait right full-height strip
+  {
+    id: 'fl-n063',
+    category: 'portrait',
+    name: 'Portrait Strip Right',
+    description: 'Full-height portrait strip on right; name and contact on left',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW * 0.6, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX, y: SY + 22, width: SW * 0.6, height: SH - 22, align: 'left', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW * 0.65, y: 0, width: W - SX - SW * 0.65, height: H, align: 'center', verticalAlign: 'middle', clipShape: 'rect' },
+    ],
+  },
+
+  // fl-n064 — text-only, name left + social right same row, contact full row below
+  {
+    id: 'fl-n064',
+    category: 'text-only',
+    name: 'Name Social Row',
+    description: 'Name left and social right share the top row; contact spans below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,      width: SW * 0.55, height: 14, align: 'left',  verticalAlign: 'middle' },
+      { name: 'social',       x: SX + SW * 0.6,  y: SY,      width: SW * 0.4,  height: 14, align: 'right', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,             y: SY + 16, width: SW,        height: SH - 16, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n065 — logo, logo right + tagline below logo, name left
+  {
+    id: 'fl-n065',
+    category: 'logo',
+    name: 'Logo Tagline Right',
+    description: 'Name and contact on left; logo with tagline beneath it on the right',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,      width: SW * 0.55, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,            y: SY + 20, width: SW * 0.55, height: 22, align: 'left',  verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW * 0.6, y: SY,      width: SW * 0.4,  height: 20, align: 'center', verticalAlign: 'top' },
+      { name: 'tagline',      x: SX + SW * 0.6, y: SY + 22, width: SW * 0.4,  height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n066 — qr-code, QR large centered, name+contact above and below
+  {
+    id: 'fl-n066',
+    category: 'qr-code',
+    name: 'QR Center Focus',
+    description: 'QR code is the visual centerpiece; name above, contact below',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,                          width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + (SW - 22) / 2, y: SY + 12,    width: 22, height: 22, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 36,                    width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n067 — logo-portrait, both on same right side
+  {
+    id: 'fl-n067',
+    category: 'logo-portrait',
+    name: 'Logo Portrait Right Side',
+    description: 'Logo top-right and portrait bottom-right; name and contact fill left side',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW * 0.65, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 22,      width: SW * 0.65, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW * 0.7, y: SY,          width: SW * 0.3,  height: 14, align: 'right', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW * 0.7, y: SY + SH - 20, width: SW * 0.3, height: 20, align: 'right', verticalAlign: 'bottom', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n068 — text-only, name bottom-right, contact top-left
+  {
+    id: 'fl-n068',
+    category: 'text-only',
+    name: 'Reversed Diagonal',
+    description: 'Contact details top-left; name anchored to the bottom-right',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'contact-info', x: SX,             y: SY,           width: SW * 0.6,  height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX,             y: SY + 20,      width: SW * 0.5,  height: 10, align: 'left',  verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + SW * 0.35, y: SY + SH - 14, width: SW * 0.65, height: 14, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n069 — logo-qr, stacked vertically centered
+  {
+    id: 'fl-n069',
+    category: 'logo-qr',
+    name: 'Logo QR Vertical Stack',
+    description: 'Logo, name, contact, and QR all stacked vertically and centered',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'logo',         x: SX, y: SY,                          width: SW, height: 10, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 12,                     width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 26,                     width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + (SW - 14) / 2, y: SY + SH - 14, width: 14, height: 14, align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n070 — portrait, portrait top center, name below, contact at bottom
+  {
+    id: 'fl-n070',
+    category: 'portrait',
+    name: 'Portrait Top Center',
+    description: 'Portrait circle centered at top, name directly below, contact at the bottom',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'portrait',     x: SX + (SW - 22) / 2, y: SY,      width: 22, height: 22, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'name-title',   x: SX,                 y: SY + 24, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,                 y: SY + 38, width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n071 — text-only, compact card feel, everything small and left
+  {
+    id: 'fl-n071',
+    category: 'text-only',
+    name: 'Compact Left',
+    description: 'All elements compacted into left half; right half intentionally blank',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW * 0.5, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 18, width: SW * 0.5, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 36, width: SW * 0.5, height: 8,  align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n072 — logo, logo bottom-left inline with social
+  {
+    id: 'fl-n072',
+    category: 'logo',
+    name: 'Logo Social Footer',
+    description: 'Name and contact fill top; logo and social share the bottom row',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX,      y: SY,           width: SW,      height: 18, align: 'left',   verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,      y: SY + 20,      width: SW,      height: 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'logo',         x: SX,      y: SY + SH - 10, width: 14,      height: 10, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'social',       x: SX + 18, y: SY + SH - 10, width: SW - 18, height: 10, align: 'left',   verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n073 — portrait-qr, name top large, portrait mid-left, qr mid-right, contact below
+  {
+    id: 'fl-n073',
+    category: 'portrait-qr',
+    name: 'Name Top Assets Middle',
+    description: 'Name spans top; portrait and QR side by side in the middle; contact at bottom',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,                   width: SW, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,           y: SY + 16,              width: SW * 0.45, height: 20, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'qr-code',      x: SX + SW * 0.5, y: SY + 16,             width: 20,        height: 20, align: 'left',   verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + SH - 8,          width: SW,        height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n074 — logo-portrait, logo center, name below logo, portrait right
+  {
+    id: 'fl-n074',
+    category: 'logo-portrait',
+    name: 'Logo Center Portrait Side',
+    description: 'Logo and name centered; portrait circle to the right; contact at bottom',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY,      width: SW - 26, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,           y: SY + 14, width: SW - 26, height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 30, width: SW - 26, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 22, y: SY + (SH - 24) / 2, width: 22, height: 24, align: 'right', verticalAlign: 'middle', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n075 — text-only, name + tagline headline block, contact bottom
+  {
+    id: 'fl-n075',
+    category: 'text-only',
+    name: 'Tagline Headline',
+    description: 'Name and tagline form a headline block; contact details below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW, height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'tagline',      x: SX, y: SY + 18, width: SW, height: 8,  align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 30, width: SW * 0.6, height: 16, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n076 — qr-code, name top-right, contact bottom-left, QR bottom-right
+  {
+    id: 'fl-n076',
+    category: 'qr-code',
+    name: 'QR Bottom Right Name Top',
+    description: 'Name top-right, contact bottom-left, QR anchored bottom-right',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW - 24, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + SH - 18, width: SW - 22, height: 18, align: 'left',  verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX + SW - 20, y: SY + SH - 20, width: 20,      height: 20, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n077 — logo, name + logo in header band, contact full below
+  {
+    id: 'fl-n077',
+    category: 'logo',
+    name: 'Header Band Logo',
+    description: 'Name and logo share a top header band; contact info below',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,      width: SW * 0.72, height: 14, align: 'left',  verticalAlign: 'middle' },
+      { name: 'logo',         x: SX + SW * 0.78, y: SY,     width: SW * 0.22, height: 14, align: 'right', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,            y: SY + 18, width: SW,        height: 22, align: 'left',  verticalAlign: 'top' },
+      { name: 'social',       x: SX,            y: SY + 42, width: SW,        height: 6,  align: 'left',  verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n078 — portrait-qr, portrait centered, qr top-left, name below portrait, contact bottom
+  {
+    id: 'fl-n078',
+    category: 'portrait-qr',
+    name: 'Portrait Center QR Accent',
+    description: 'Portrait circle centered; QR accent top-left; name and contact below portrait',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'qr-code',      x: SX,                 y: SY,      width: 16, height: 16, align: 'left',   verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + (SW - 24) / 2, y: SY,      width: 24, height: 24, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'name-title',   x: SX,                 y: SY + 26, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,                 y: SY + 40, width: SW, height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n079 — text-only, social handles prominent top, name below
+  {
+    id: 'fl-n079',
+    category: 'text-only',
+    name: 'Social First',
+    description: 'Social handles displayed prominently at top; name and contact below',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'social',       x: SX, y: SY,      width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX, y: SY + 14, width: SW, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 32, width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n080 — logo-qr, logo bottom-left, qr bottom-right, name top-center
+  {
+    id: 'fl-n080',
+    category: 'logo-qr',
+    name: 'Name Top Logo QR Corners',
+    description: 'Name centered at top; contact in middle; logo and QR at bottom corners',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW, height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 18,      width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'logo',         x: SX,           y: SY + SH - 14, width: 18, height: 14, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX + SW - 16, y: SY + SH - 16, width: 16, height: 16, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n081 — text-only, name right-aligned, all content right
+  {
+    id: 'fl-n081',
+    category: 'text-only',
+    name: 'All Right',
+    description: 'Every region right-aligned; strong editorial feel',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 22, width: SW, height: 14, align: 'right', verticalAlign: 'top' },
+      { name: 'social',       x: SX, y: SY + 38, width: SW, height: 8,  align: 'right', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n082 — logo, logo and credentials bottom row
+  {
+    id: 'fl-n082',
+    category: 'logo',
+    name: 'Credentials Logo Footer',
+    description: 'Name at top, contact below, credentials and logo share the bottom row',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,           width: SW,      height: 16, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,            y: SY + 18,      width: SW,      height: 14, align: 'left',  verticalAlign: 'top' },
+      { name: 'credentials',  x: SX,            y: SY + SH - 10, width: SW - 20, height: 10, align: 'left',  verticalAlign: 'bottom' },
+      { name: 'logo',         x: SX + SW - 16,  y: SY + SH - 14, width: 16,      height: 14, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n083 — portrait, portrait bottom-right rounded, name top
+  {
+    id: 'fl-n083',
+    category: 'portrait',
+    name: 'Portrait Rounded Corner',
+    description: 'Name and contact fill top and center; portrait with rounded clip bottom-right',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,           width: SW - 26, height: 20, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 22,      width: SW - 26, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 22, y: SY + SH - 22, width: 22,      height: 22, align: 'right', verticalAlign: 'bottom', clipShape: 'rounded' },
+    ],
+  },
+
+  // fl-n084 — text-only, credentials prominent
+  {
+    id: 'fl-n084',
+    category: 'text-only',
+    name: 'Credentials Prominent',
+    description: 'Name top, large credentials block, contact at the bottom',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,      width: SW, height: 14, align: 'left', verticalAlign: 'top' },
+      { name: 'credentials',  x: SX, y: SY + 16, width: SW, height: 14, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 32, width: SW * 0.6, height: 12, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n085 — logo-portrait, logo and portrait both circle-like side by side top
+  {
+    id: 'fl-n085',
+    category: 'logo-portrait',
+    name: 'Logo Portrait Side by Side',
+    description: 'Logo and portrait circle sit side by side at the top; name and contact below',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'logo',         x: SX,             y: SY,      width: SW * 0.35, height: 18, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW * 0.4,  y: SY,      width: 18,        height: 18, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'name-title',   x: SX,             y: SY + 20, width: SW,        height: 14, align: 'center', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,             y: SY + 36, width: SW,        height: 8,  align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n086 — qr-code, full-height QR strip right, everything left
+  {
+    id: 'fl-n086',
+    category: 'qr-code',
+    name: 'QR Tall Strip Right',
+    description: 'Tall QR code fills the right edge; name and contact stack on the left',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,      width: SW - 32, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + 22, width: SW - 32, height: SH - 22, align: 'left', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 28, y: SY,      width: 28,      height: SH, align: 'center', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n087 — logo-qr, logo centered mid, qr small top-right, name top, contact bottom
+  {
+    id: 'fl-n087',
+    category: 'logo-qr',
+    name: 'Logo Mid QR Small',
+    description: 'Name at top, large logo in the middle, contact below, small QR top-right',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,           y: SY,                    width: SW - 18, height: 12, align: 'left',   verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + SW - 16, y: SY,                    width: 16,      height: 16, align: 'right',  verticalAlign: 'top' },
+      { name: 'logo',         x: SX,           y: SY + 14,               width: SW,      height: 14, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,           y: SY + 30,               width: SW,      height: 14, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n088 — text-only, wide left column for name, narrow right column for all contact
+  {
+    id: 'fl-n088',
+    category: 'text-only',
+    name: 'Wide Left Narrow Right',
+    description: 'Name fills wide left column; contact and social in narrow right column',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY, width: SW * 0.55, height: SH, align: 'left',  verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + SW * 0.6,  y: SY, width: SW * 0.4,  height: SH * 0.6, align: 'left', verticalAlign: 'middle' },
+      { name: 'social',       x: SX + SW * 0.6,  y: SY + SH * 0.65, width: SW * 0.4, height: SH * 0.35, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n089 — portrait, portrait large bottom-left, name top right
+  {
+    id: 'fl-n089',
+    category: 'portrait',
+    name: 'Large Portrait Bottom Left',
+    description: 'Large portrait anchored bottom-left; name and contact fill top-right',
+    supports: { portrait: true, logo: false, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX + 34,      y: SY,           width: SW - 34, height: 20, align: 'right', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX + 34,      y: SY + 22,      width: SW - 34, height: 18, align: 'right', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,           y: SY + SH - 30, width: 30,      height: 30, align: 'left',  verticalAlign: 'bottom', clipShape: 'rounded' },
+    ],
+  },
+
+  // fl-n090 — text-only, contact left, name bottom, social top-right
+  {
+    id: 'fl-n090',
+    category: 'text-only',
+    name: 'Three Zone Asymmetric',
+    description: 'Contact left column, social top-right, name bottom-center',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'contact-info', x: SX,             y: SY,           width: SW * 0.45, height: SH - 14, align: 'left',   verticalAlign: 'top' },
+      { name: 'social',       x: SX + SW * 0.5,  y: SY,           width: SW * 0.5,  height: 12,     align: 'right',  verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,             y: SY + SH - 12, width: SW,        height: 12,     align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n091 — logo, logo top-right, name bottom-left, credentials bottom-right
+  {
+    id: 'fl-n091',
+    category: 'logo',
+    name: 'Logo Top Credentials Corner',
+    description: 'Logo top-right; name and contact left; credentials bottom-right corner',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'logo',         x: SX + SW - 18, y: SY,           width: 18,       height: 14, align: 'right', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX,           y: SY,           width: SW - 22,  height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,           y: SY + 20,      width: SW * 0.6, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'credentials',  x: SX + SW * 0.65, y: SY + SH - 10, width: SW * 0.35, height: 10, align: 'right', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n092 — portrait-qr, name top, portrait centered, qr bottom-right, contact bottom-left
+  {
+    id: 'fl-n092',
+    category: 'portrait-qr',
+    name: 'Portrait Mid QR Footer',
+    description: 'Name spans top; portrait in center; contact and QR share the bottom',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX,                 y: SY,           width: SW, height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + (SW - 20) / 2, y: SY + 14,     width: 20, height: 20, align: 'center', verticalAlign: 'top', clipShape: 'circle' },
+      { name: 'contact-info', x: SX,                 y: SY + SH - 12, width: SW - 18, height: 12, align: 'left',   verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX + SW - 16,       y: SY + SH - 16, width: 16,      height: 16, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n093 — logo-portrait, logo left, portrait right, name center top, contact center bottom
+  {
+    id: 'fl-n093',
+    category: 'logo-portrait',
+    name: 'Logo Left Portrait Right Center',
+    description: 'Logo far-left, portrait far-right, name and contact fill the center',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'logo',         x: SX,           y: SY + (SH - 16) / 2, width: 18,       height: 16, align: 'left',   verticalAlign: 'middle' },
+      { name: 'name-title',   x: SX + 22,      y: SY,                  width: SW - 46,  height: 20, align: 'center', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 22,      y: SY + SH * 0.52,      width: SW - 46,  height: SH * 0.48, align: 'center', verticalAlign: 'top' },
+      { name: 'portrait',     x: SX + SW - 22, y: SY + (SH - 24) / 2,  width: 22,       height: 24, align: 'right',  verticalAlign: 'middle', clipShape: 'circle' },
+    ],
+  },
+
+  // fl-n094 — text-only, name top-left, tagline top-right, contact full bottom
+  {
+    id: 'fl-n094',
+    category: 'text-only',
+    name: 'Tagline Top Right',
+    description: 'Name top-left, tagline top-right, contact spans the bottom half',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'lavender',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,      width: SW * 0.55, height: 14, align: 'left',  verticalAlign: 'top' },
+      { name: 'tagline',      x: SX + SW * 0.6,  y: SY,      width: SW * 0.4,  height: 14, align: 'right', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,             y: SY + 18, width: SW,        height: SH - 18, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n095 — qr-code, QR bottom-center, name top, contact middle
+  {
+    id: 'fl-n095',
+    category: 'qr-code',
+    name: 'QR Bottom Center Accent',
+    description: 'Name top, contact middle, QR as bottom accent centered',
+    supports: { portrait: false, logo: false, qrCode: true },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'name-title',   x: SX, y: SY,                    width: SW,  height: 16, align: 'left', verticalAlign: 'top' },
+      { name: 'contact-info', x: SX, y: SY + 18,               width: SW,  height: 12, align: 'left', verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX + (SW - 14) / 2, y: SY + SH - 14, width: 14, height: 14, align: 'center', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n096 — logo-qr, logo left, qr left below logo, name right
+  {
+    id: 'fl-n096',
+    category: 'logo-qr',
+    name: 'Logo QR Left Stack',
+    description: 'Logo and QR stacked vertically on the left; name and contact fill the right',
+    supports: { portrait: false, logo: true, qrCode: true },
+    defaultPaletteId: 'slate',
+    regions: [
+      { name: 'logo',         x: SX,       y: SY,                    width: 18,      height: 14, align: 'left',  verticalAlign: 'top' },
+      { name: 'qr-code',      x: SX,       y: SY + SH - 16,          width: 16,      height: 16, align: 'left',  verticalAlign: 'bottom' },
+      { name: 'name-title',   x: SX + 22,  y: SY,                    width: SW - 22, height: 20, align: 'left',  verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 22,  y: SY + SH * 0.5,         width: SW - 22, height: SH * 0.5, align: 'left', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n097 — portrait-qr, portrait top-right, qr bottom-left, name left, contact bottom-right
+  {
+    id: 'fl-n097',
+    category: 'portrait-qr',
+    name: 'Portrait Top Right QR Bottom Left',
+    description: 'Portrait top-right, QR bottom-left; name and contact fill the remaining space',
+    supports: { portrait: true, logo: false, qrCode: true },
+    defaultPaletteId: 'navy',
+    regions: [
+      { name: 'portrait',     x: SX + SW - 20, y: SY,           width: 20, height: 20, align: 'right', verticalAlign: 'top',    clipShape: 'circle' },
+      { name: 'name-title',   x: SX,           y: SY,           width: SW - 24, height: 20, align: 'left', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX + 22,      y: SY + SH - 14, width: SW - 22, height: 14, align: 'left', verticalAlign: 'bottom' },
+      { name: 'qr-code',      x: SX,           y: SY + SH - 18, width: 18,      height: 18, align: 'left', verticalAlign: 'bottom' },
+    ],
+  },
+
+  // fl-n098 — logo, logo right, credentials below logo, name left
+  {
+    id: 'fl-n098',
+    category: 'logo',
+    name: 'Logo Credentials Right',
+    description: 'Name and contact on left; logo with credentials stacked right',
+    supports: { portrait: false, logo: true, qrCode: false },
+    defaultPaletteId: 'midnight',
+    regions: [
+      { name: 'name-title',   x: SX,            y: SY,      width: SW * 0.55, height: 18, align: 'left',  verticalAlign: 'top' },
+      { name: 'contact-info', x: SX,            y: SY + 20, width: SW * 0.55, height: 22, align: 'left',  verticalAlign: 'top' },
+      { name: 'logo',         x: SX + SW * 0.6, y: SY,      width: SW * 0.4,  height: 16, align: 'center', verticalAlign: 'top' },
+      { name: 'credentials',  x: SX + SW * 0.6, y: SY + 18, width: SW * 0.4,  height: 10, align: 'center', verticalAlign: 'top' },
+    ],
+  },
+
+  // fl-n099 — text-only, four-zone layout: name top-left, tagline top-right, contact bottom-left, social bottom-right
+  {
+    id: 'fl-n099',
+    category: 'text-only',
+    name: 'Four Zone Text',
+    description: 'Card split into four quadrants: name, tagline, contact, social',
+    supports: { portrait: false, logo: false, qrCode: false },
+    defaultPaletteId: 'ocean',
+    regions: [
+      { name: 'name-title',   x: SX,             y: SY,             width: SW * 0.48, height: SH * 0.48, align: 'left',  verticalAlign: 'middle' },
+      { name: 'tagline',      x: SX + SW * 0.52, y: SY,             width: SW * 0.48, height: SH * 0.48, align: 'right', verticalAlign: 'middle' },
+      { name: 'contact-info', x: SX,             y: SY + SH * 0.52, width: SW * 0.48, height: SH * 0.48, align: 'left',  verticalAlign: 'middle' },
+      { name: 'social',       x: SX + SW * 0.52, y: SY + SH * 0.52, width: SW * 0.48, height: SH * 0.48, align: 'right', verticalAlign: 'middle' },
+    ],
+  },
+
+  // fl-n100 — logo-portrait, logo top, portrait bottom-left circle, name right, contact bottom-right
+  {
+    id: 'fl-n100',
+    category: 'logo-portrait',
+    name: 'Logo Top Portrait Footer',
+    description: 'Logo centered at top; name right side; portrait bottom-left; contact bottom-right',
+    supports: { portrait: true, logo: true, qrCode: false },
+    defaultPaletteId: 'charcoal',
+    regions: [
+      { name: 'logo',         x: SX,             y: SY,           width: SW,      height: 12, align: 'center', verticalAlign: 'top' },
+      { name: 'name-title',   x: SX + SW * 0.3,  y: SY + 14,     width: SW * 0.7, height: 18, align: 'right',  verticalAlign: 'top' },
+      { name: 'portrait',     x: SX,             y: SY + SH - 20, width: 20,      height: 20, align: 'left',   verticalAlign: 'bottom', clipShape: 'circle' },
+      { name: 'contact-info', x: SX + 24,        y: SY + SH - 14, width: SW - 24, height: 14, align: 'right',  verticalAlign: 'bottom' },
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Registry
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -2070,6 +3614,7 @@ export const frontLayouts: FrontLayout[] = [
   ...groupE,
   ...groupF,
   ...groupG,
+  ...groupN,
 ];
 
 export function getFrontLayout(id: string): FrontLayout | undefined {

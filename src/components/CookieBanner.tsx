@@ -34,6 +34,10 @@ export default function CookieBanner() {
     } else if (consent === 'accepted') {
       loadGoogleAnalytics();
     }
+
+    function handleShowBanner() { setVisible(true); }
+    window.addEventListener('bcard-show-cookie-banner', handleShowBanner);
+    return () => window.removeEventListener('bcard-show-cookie-banner', handleShowBanner);
   }, []);
 
   const handleAccept = () => {

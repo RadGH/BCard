@@ -61,19 +61,32 @@ export default function SocialLinks({ data, colors, bodyFont, region, iconStyle 
         const iconY = baseY - ICON_MM; // top of icon aligned with text cap height approx
 
         if (showIcon && link.svgPath) {
-          // For left-aligned: icon at tx, text at tx + ICON_MM + ICON_GAP
-          // For center/right-aligned: keep existing text anchor, icon offset left of text start
           const iconScale = ICON_MM / link.viewBoxWidth;
-          const textX = region.align === 'left' ? tx + ICON_MM + ICON_GAP : tx;
-          const iconTx = region.align === 'left'
-            ? tx
-            : region.align === 'right'
-              ? tx - ICON_MM - ICON_GAP  // icon left of right edge
-              : tx - (ICON_MM + ICON_GAP) / 2; // roughly centered for center align
+
+          let effectiveIconTx: number;
+          let effectiveTextX: number;
+          let effectiveAnchor: 'start' | 'middle' | 'end';
+
+          if (region.align === 'left') {
+            effectiveIconTx = tx;
+            effectiveTextX = tx + ICON_MM + ICON_GAP;
+            effectiveAnchor = 'start';
+          } else if (region.align === 'right') {
+            effectiveTextX = tx - ICON_MM - ICON_GAP;
+            effectiveIconTx = tx - ICON_MM;
+            effectiveAnchor = 'end';
+          } else {
+            // center: estimate total width to center [icon+gap+text] as a group
+            const estimatedTextWidth = link.value.length * socialSize * 0.48;
+            const totalWidth = ICON_MM + ICON_GAP + estimatedTextWidth;
+            effectiveIconTx = tx - totalWidth / 2;
+            effectiveTextX = effectiveIconTx + ICON_MM + ICON_GAP;
+            effectiveAnchor = 'start';
+          }
 
           return (
             <g key={i}>
-              <g transform={`translate(${iconTx}, ${iconY}) scale(${iconScale})`}>
+              <g transform={`translate(${effectiveIconTx}, ${iconY}) scale(${iconScale})`}>
                 <path
                   d={link.svgPath}
                   fill={iconStyle === 'solid' ? colors.accent : 'none'}
@@ -82,12 +95,12 @@ export default function SocialLinks({ data, colors, bodyFont, region, iconStyle 
                 />
               </g>
               <text
-                x={textX}
+                x={effectiveTextX}
                 y={baseY}
                 fontFamily={`'${bodyFont}', sans-serif`}
                 fontSize={socialSize}
                 fill={colors.accent}
-                textAnchor={anchor}
+                textAnchor={effectiveAnchor}
               >
                 {link.value}
               </text>

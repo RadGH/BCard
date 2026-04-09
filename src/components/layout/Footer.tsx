@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Mail } from 'lucide-react';
 import { APP_VERSION } from '../../lib/version';
 
 export default function Footer() {
@@ -11,9 +12,13 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h3 className="text-white font-bold text-lg mb-3">BCard</h3>
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed mb-3">
               Create professional business cards in minutes. 200+ templates, full customization, print-ready exports. All free, all client-side.
             </p>
+            <a href="mailto:support@bcardbuilder.com" className="inline-flex items-center gap-1.5 text-sm hover:text-white transition-colors">
+              <Mail className="w-3.5 h-3.5" aria-hidden="true" />
+              support@bcardbuilder.com
+            </a>
           </div>
 
           {/* Product */}
@@ -42,9 +47,15 @@ export default function Footer() {
               <li>Data stays in your browser</li>
               <li>Export as SVG, PDF, or PNG</li>
               <li>
-                <a href="mailto:support@bcardbuilder.com" className="hover:text-white transition-colors">
-                  support@bcardbuilder.com
-                </a>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('bcard-cookie-consent');
+                    window.dispatchEvent(new CustomEvent('bcard-show-cookie-banner'));
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  Cookie Settings
+                </button>
               </li>
             </ul>
           </div>

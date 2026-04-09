@@ -5,6 +5,7 @@ import type { BusinessCardData } from '../../types/card';
 import type { ColorPalette } from '../../types/template';
 import { renderFront, resolveColorPalette, getDefaultPaletteId } from '../../templates/registry';
 import { DEFAULT_TITLE_FONT, DEFAULT_BODY_FONT } from '../../templates/registry';
+import { trackEvent } from '../../lib/analytics';
 
 interface Props {
   layout: FrontLayout;
@@ -31,7 +32,10 @@ function ShowcaseCard({ layout, sampleData, brandingData, brandingPalette, brand
 
   return (
     <button
-      onClick={() => navigate(`/editor?layout=${encodeURIComponent(layout.id)}`)}
+      onClick={() => {
+        trackEvent('template_selected', { template_id: layout.id, template_name: layout.name });
+        navigate(`/editor?layout=${encodeURIComponent(layout.id)}`);
+      }}
       className="group rounded-xl overflow-hidden border border-slate-200 bg-white hover:shadow-lg transition-all duration-200 text-left w-full"
     >
       <div style={{ aspectRatio: '95.25 / 57.15' }} className="bg-white overflow-hidden">

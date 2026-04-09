@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Region, ColorPalette } from '../../types/template';
 import { resolvePublicUrl } from '../../lib/public-url';
 
@@ -18,8 +17,20 @@ export default function LogoSlot({ src, companyName, useTextLogo = true, region,
     const cx = region.x + region.width / 2;
     const cy = region.y + region.height / 2;
     const scaleTransform = scale !== 1 ? `translate(${cx} ${cy}) scale(${scale}) translate(${-cx} ${-cy})` : undefined;
+    // Use a stable filter ID based on position + color to avoid collisions
+    const filterId = colorOverride
+      ? `logo-color-${Math.round(region.x * 10)}-${colorOverride.replace('#', '')}`
+      : undefined;
     return (
       <g transform={scaleTransform}>
+        {filterId && colorOverride && (
+          <defs>
+            <filter id={filterId} x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+              <feFlood floodColor={colorOverride} result="flood" />
+              <feComposite in="flood" in2="SourceGraphic" operator="in" />
+            </filter>
+          </defs>
+        )}
         <image
           href={resolvePublicUrl(src)}
           x={region.x}
@@ -27,17 +38,8 @@ export default function LogoSlot({ src, companyName, useTextLogo = true, region,
           width={region.width}
           height={region.height}
           preserveAspectRatio="xMidYMid meet"
+          filter={filterId ? `url(#${filterId})` : undefined}
         />
-        {colorOverride && (
-          <rect
-            x={region.x}
-            y={region.y}
-            width={region.width}
-            height={region.height}
-            fill={colorOverride}
-            style={{ mixBlendMode: 'color' } as React.CSSProperties}
-          />
-        )}
       </g>
     );
   }

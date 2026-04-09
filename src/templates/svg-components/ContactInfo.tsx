@@ -91,17 +91,32 @@ export default function ContactInfo({ data, colors, bodyFont, region, iconStyle 
           const iconScale = iconDef ? ICON_MM / iconDef.viewBoxWidth : ICON_MM / 512;
           const iconPath = iconDef?.path ?? '';
 
-          const textX = region.align === 'left' ? tx + ICON_MM + ICON_GAP : tx;
-          const iconTx = region.align === 'left'
-            ? tx
-            : region.align === 'right'
-              ? tx - ICON_MM - ICON_GAP
-              : tx - (ICON_MM + ICON_GAP) / 2;
+          let effectiveIconTx: number;
+          let effectiveTextX: number;
+          let effectiveAnchor: 'start' | 'middle' | 'end';
+
+          if (region.align === 'left') {
+            effectiveIconTx = tx;
+            effectiveTextX = tx + ICON_MM + ICON_GAP;
+            effectiveAnchor = 'start';
+          } else if (region.align === 'right') {
+            // [text][gap][icon] — text right-aligns, icon at far right
+            effectiveTextX = tx - ICON_MM - ICON_GAP;
+            effectiveIconTx = tx - ICON_MM;
+            effectiveAnchor = 'end';
+          } else {
+            // center: estimate total width to center [icon+gap+text] as a group
+            const estimatedTextWidth = entry.text.length * bodySize * 0.48;
+            const totalWidth = ICON_MM + ICON_GAP + estimatedTextWidth;
+            effectiveIconTx = tx - totalWidth / 2;
+            effectiveTextX = effectiveIconTx + ICON_MM + ICON_GAP;
+            effectiveAnchor = 'start';
+          }
 
           return (
             <g key={i}>
               {iconPath && (
-                <g transform={`translate(${iconTx}, ${iconY}) scale(${iconScale})`}>
+                <g transform={`translate(${effectiveIconTx}, ${iconY}) scale(${iconScale})`}>
                   <path
                     d={iconPath}
                     fill={iconStyle === 'solid' ? colors.textMuted : 'none'}
@@ -111,12 +126,12 @@ export default function ContactInfo({ data, colors, bodyFont, region, iconStyle 
                 </g>
               )}
               <text
-                x={textX}
+                x={effectiveTextX}
                 y={baseY}
                 fontFamily={`'${bodyFont}', sans-serif`}
                 fontSize={bodySize}
                 fill={colors.textMuted}
-                textAnchor={anchor}
+                textAnchor={effectiveAnchor}
               >
                 {entry.text}
               </text>

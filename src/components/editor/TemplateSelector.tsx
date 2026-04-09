@@ -13,6 +13,7 @@ import {
 } from '../../templates/registry';
 import { LAYOUT_FILTERS, type LayoutFilter } from '../../constants/categories';
 import { getSampleData } from '../../constants/sample-data';
+import { trackEvent } from '../../lib/analytics';
 import { DEFAULT_TITLE_FONT, DEFAULT_BODY_FONT } from '../../templates/registry';
 
 interface Props {
@@ -276,10 +277,13 @@ export default function TemplateSelector({ design, data, onDesignChange }: Props
                 layout={layout}
                 index={i}
                 isSelected={layout.id === design.frontLayoutId}
-                onSelect={() => onDesignChange({
-                  frontLayoutId: layout.id,
-                  ...(!useBranding && layout.defaultPaletteId ? { paletteId: layout.defaultPaletteId } : {}),
-                })}
+                onSelect={() => {
+                  trackEvent('template_selected', { template_id: layout.id, template_name: layout.name, source: 'editor' });
+                  onDesignChange({
+                    frontLayoutId: layout.id,
+                    ...(!useBranding && layout.defaultPaletteId ? { paletteId: layout.defaultPaletteId } : {}),
+                  });
+                }}
                 previewData={previewData}
                 previewPalette={userPalette}
                 titleFontOverride={useBranding ? design.titleFont : undefined}

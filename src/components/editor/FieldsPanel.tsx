@@ -8,6 +8,8 @@ interface Props {
   updateField: <K extends keyof BusinessCardData>(field: K, value: BusinessCardData[K]) => void;
   updateSocial: (field: string, value: string) => void;
   updateAddress: (field: string, value: string) => void;
+  iconStyle?: 'solid' | 'outline' | 'none';
+  onIconStyleChange?: (v: 'solid' | 'outline' | 'none') => void;
 }
 
 function FieldLabel({ icon, children }: { icon?: React.ReactNode; children: React.ReactNode }) {
@@ -43,7 +45,7 @@ function Input({ label, icon, value, onChange, placeholder, type = 'text' }: {
   );
 }
 
-export default function FieldsPanel({ data, updateField, updateSocial, updateAddress }: Props) {
+export default function FieldsPanel({ data, updateField, updateSocial, updateAddress, iconStyle, onIconStyleChange }: Props) {
   const addSelectRef = useRef<HTMLSelectElement>(null);
 
   const addedNetworkIds = Object.keys(data.social ?? {});
@@ -155,6 +157,29 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
           )}
         </div>
       </section>
+
+      {onIconStyleChange && (
+        <section>
+          <h3 className="text-sm font-semibold text-slate-700 mb-2">Icon Style</h3>
+          <p className="text-xs text-slate-600 mb-2">Controls icons on social &amp; contact items</p>
+          <div className="flex gap-2 flex-wrap">
+            {[
+              { value: 'solid', label: 'Solid Icon' },
+              { value: 'outline', label: 'Outline Icon' },
+              { value: 'none', label: 'None' },
+            ].map(opt => (
+              <button key={opt.value}
+                onClick={() => onIconStyleChange(opt.value as 'solid' | 'outline' | 'none')}
+                className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${
+                  (iconStyle ?? 'none') === opt.value
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-50'
+                }`}
+              >{opt.label}</button>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
