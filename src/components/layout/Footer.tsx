@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { APP_VERSION } from '../../lib/version';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -33,22 +34,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Info */}
+          {/* Support */}
           <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wide mb-3">Info</h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wide mb-3">Support</h4>
             <ul className="space-y-2 text-sm">
               <li>No account required</li>
               <li>Data stays in your browser</li>
               <li>Export as SVG, PDF, or PNG</li>
-              <li>Print-quality 300 DPI output</li>
+              <li>
+                <a href="mailto:support@bcardbuilder.com" className="hover:text-white transition-colors">
+                  support@bcardbuilder.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs">&copy; {year} BCard. All rights reserved.</p>
+          <p className="text-xs">&copy; {year} BCard. All rights reserved. {APP_VERSION}</p>
           <p className="text-xs">
-            Your data never leaves your device. No cookies, no tracking, no servers.
+            Your card data never leaves your browser.
           </p>
         </div>
       </div>

@@ -249,15 +249,14 @@ export default function StylePanel({
         <p className="text-xs text-slate-600 mb-2">Controls icons on social &amp; contact items</p>
         <div className="flex gap-2 flex-wrap">
           {[
-            { value: 'prefix', label: 'Text Prefix' },
             { value: 'solid', label: 'Solid Icon' },
             { value: 'outline', label: 'Outline Icon' },
             { value: 'none', label: 'None' },
           ].map(opt => (
             <button key={opt.value}
-              onClick={() => onDesignChange({ iconStyle: opt.value as 'prefix' | 'solid' | 'outline' | 'none' })}
+              onClick={() => onDesignChange({ iconStyle: opt.value as 'solid' | 'outline' | 'none' })}
               className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${
-                (design.iconStyle ?? 'prefix') === opt.value
+                (design.iconStyle ?? 'none') === opt.value
                   ? 'bg-blue-600 text-white border-blue-600'
                   : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-50'
               }`}

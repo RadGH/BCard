@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { LayoutFilter } from '../../constants/categories';
+import type { BusinessCardData } from '../../types/card';
+import type { ColorPalette } from '../../types/template';
 import { getAllFrontLayouts } from '../../templates/registry';
 import { getSampleData } from '../../constants/sample-data';
 import CategoryFilter from './CategoryFilter';
@@ -8,7 +10,14 @@ import ShowcaseCard from './ShowcaseCard';
 const INITIAL_COUNT = 48;
 const LOAD_MORE = 24;
 
-export default function ShowcaseGrid() {
+interface Props {
+  brandingData?: BusinessCardData;
+  brandingPalette?: ColorPalette;
+  brandingTitleFont?: string;
+  brandingBodyFont?: string;
+}
+
+export default function ShowcaseGrid({ brandingData, brandingPalette, brandingTitleFont, brandingBodyFont }: Props = {}) {
   const [filter, setFilter] = useState<LayoutFilter>('all');
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
@@ -62,6 +71,10 @@ export default function ShowcaseGrid() {
             layout={layout}
             sampleData={getSampleData(i)}
             index={i}
+            brandingData={brandingData}
+            brandingPalette={brandingPalette}
+            brandingTitleFont={brandingTitleFont}
+            brandingBodyFont={brandingBodyFont}
           />
         ))}
       </div>

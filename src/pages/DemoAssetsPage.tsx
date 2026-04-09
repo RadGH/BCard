@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 const portraits = [
   { file: 'aisha-patel.webp', name: 'Aisha Patel' },
   { file: 'carlos-mendez.webp', name: 'Carlos Mendez' },
@@ -35,6 +37,14 @@ const logos = [
 ];
 
 export default function DemoAssetsPage() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-2xl font-bold text-slate-900 mb-1">Demo Assets</h1>

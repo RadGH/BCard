@@ -86,14 +86,14 @@ function renderRegion(
       const ciColors = regionObj.textColorOverride
         ? { ...colors, textMuted: regionObj.textColorOverride }
         : colors;
-      return React.createElement(ContactInfo, { key: 'ci', data, colors: ciColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.contact });
+      return React.createElement(ContactInfo, { key: 'ci', data, colors: ciColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.contact });
     }
 
     case 'social': {
       const slColors = regionObj.textColorOverride
         ? { ...colors, textMuted: regionObj.textColorOverride }
         : colors;
-      return React.createElement(SocialLinks, { key: 'sl', data, colors: slColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'prefix' | 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.social });
+      return React.createElement(SocialLinks, { key: 'sl', data, colors: slColors, bodyFont, region: regionObj, iconStyle: options?.iconStyle as 'solid' | 'outline' | 'none' | undefined, fontSizeOverride: options?.fontSizes?.social });
     }
 
     case 'portrait':

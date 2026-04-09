@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { getBrandingPref, setBrandingPref } from '../../lib/branding-prefs';
 import { Save, Copy, Trash2 } from 'lucide-react';
 import { useCardDataContext } from '../../context/CardDataContext';
 import { usePeople } from '../../hooks/usePeople';
@@ -51,13 +52,28 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('profile');
   const [activePersonId, setActivePersonId] = useState<string | null>(null);
   const [showPrintMargins, setShowPrintMargins] = useState(false);
-  const [useBranding, setUseBranding] = useState(false);
+  const [useBranding, setUseBranding] = useState(() => getBrandingPref());
+  const handleSetUseBranding = useCallback((v: boolean) => {
+    setUseBranding(v);
+    setBrandingPref(v);
+  }, []);
   const [advancedSide, setAdvancedSide] = useState<'front' | 'back'>('front');
+  const [confirmCardDelete, setConfirmCardDelete] = useState(false);
 
   const [savedCards, setSavedCards] = useState<SavedCardEntry[]>(() => {
     try { return JSON.parse(localStorage.getItem(CARDS_KEY) ?? '[]'); } catch { return []; }
   });
   const [activeSavedCardId, setActiveSavedCardId] = useState<string | null>(null);
+
+  // Refs for checkpoint handler to access latest state without stale closures
+  const savedCardsRef = useRef(savedCards);
+  const activeSavedCardIdRef = useRef(activeSavedCardId);
+  const dataRef = useRef(data);
+  const designRef = useRef(design);
+  useEffect(() => { savedCardsRef.current = savedCards; }, [savedCards]);
+  useEffect(() => { activeSavedCardIdRef.current = activeSavedCardId; }, [activeSavedCardId]);
+  useEffect(() => { dataRef.current = data; }, [data]);
+  useEffect(() => { designRef.current = design; }, [design]);
   const [showSaveCardForm, setShowSaveCardForm] = useState(false);
   const [saveCardName, setSaveCardName] = useState('');
 
@@ -71,6 +87,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
     loadCard(card.data, card.design);
     setActiveSavedCardId(card.id);
     setActivePersonId(null);
+    setConfirmCardDelete(false);
   }, [loadCard]);
 
   const handleSaveCard = useCallback(() => {
@@ -120,6 +137,31 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
     window.addEventListener('bcard-load', handler);
     return () => window.removeEventListener('bcard-load', handler);
   }, [loadCard]);
+
+  // Listen for checkpoint events from sticky preview widget
+  useEffect(() => {
+    const handler = () => {
+      const currentCards = savedCardsRef.current;
+      const currentId = activeSavedCardIdRef.current;
+      const currentData = dataRef.current;
+      const currentDesign = designRef.current;
+      if (currentId) {
+        // Silently update the existing card
+        const updated = currentCards.map(c =>
+          c.id === currentId ? { ...c, data: currentData, design: currentDesign, savedAt: Date.now() } : c
+        );
+        persistCards(updated);
+      } else {
+        // Create new checkpoint card
+        const name = `Checkpoint ${new Date().toLocaleTimeString()}`;
+        const entry: SavedCardEntry = { id: crypto.randomUUID(), name, data: currentData, design: currentDesign, savedAt: Date.now() };
+        persistCards([entry, ...currentCards]);
+        setActiveSavedCardId(entry.id);
+      }
+    };
+    window.addEventListener('bcard-checkpoint', handler);
+    return () => window.removeEventListener('bcard-checkpoint', handler);
+  }, []);
 
   const handleSelectPerson = useCallback((person: PersonData) => {
     setActivePersonId(person.id);
@@ -213,15 +255,29 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                   >
                     <Copy className="w-4 h-4" aria-hidden="true" />
                   </button>
-                  {/* Delete button - A01 */}
-                  <button
-                    onClick={() => handleDeleteCard(activeSavedCardId)}
-                    aria-label="Delete card"
-                    title="Delete card"
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <Trash2 className="w-4 h-4" aria-hidden="true" />
-                  </button>
+                  {/* Delete button with inline confirmation */}
+                  {confirmCardDelete ? (
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs text-red-600 font-medium">Sure?</span>
+                      <button
+                        onClick={() => { handleDeleteCard(activeSavedCardId); setConfirmCardDelete(false); }}
+                        className="px-2 py-1 text-xs bg-red-600 text-white rounded hover:bg-red-700"
+                      >Yes</button>
+                      <button
+                        onClick={() => setConfirmCardDelete(false)}
+                        className="px-2 py-1 text-xs bg-slate-100 text-slate-600 rounded hover:bg-slate-200"
+                      >No</button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setConfirmCardDelete(true)}
+                      aria-label="Delete card"
+                      title="Delete card"
+                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" aria-hidden="true" />
+                    </button>
+                  )}
                 </>
               )}
             </div>
@@ -402,7 +458,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
         design={design}
         data={data}
         useBranding={useBranding}
-        onToggleBranding={setUseBranding}
+        onToggleBranding={handleSetUseBranding}
         onLayoutChange={(frontLayoutId, paletteId) => updateDesign({ frontLayoutId, ...(paletteId ? { paletteId } : {}) })}
       />
 
@@ -411,7 +467,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
         design={design}
         data={data}
         useBranding={useBranding}
-        onToggleBranding={setUseBranding}
+        onToggleBranding={handleSetUseBranding}
         onLayoutChange={(frontLayoutId, paletteId) => updateDesign({ frontLayoutId, ...(paletteId ? { paletteId } : {}) })}
       />
     </div>

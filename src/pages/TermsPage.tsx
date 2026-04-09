@@ -46,6 +46,11 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">Analytics</h2>
+          <p>We use Google Analytics for aggregate usage statistics. By accepting cookies via the cookie banner, you consent to analytics data collection as described in our <Link to="/privacy" className="text-blue-600 hover:text-blue-800">Privacy Policy</Link>. You may decline analytics at any time and continue using BCard without tracking.</p>
+        </section>
+
+        <section>
           <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">Changes</h2>
           <p>These terms may be updated at any time. Continued use of BCard after changes constitutes acceptance of the revised terms.</p>
         </section>

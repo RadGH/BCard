@@ -11,6 +11,17 @@ export default defineConfig({
   server: {
     allowedHosts: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('jspdf') || id.includes('jspdf-autotable')) return 'pdf-export';
+          if (id.includes('svg2pdf')) return 'svg2pdf';
+          if (id.includes('html2canvas')) return 'html2canvas';
+        },
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',

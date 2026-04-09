@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import type { BusinessCardData } from '../../types/card';
 import { SOCIAL_NETWORK_IDS, getSocialNetwork } from '../../constants/social-networks';
-import { Mail, Phone, Printer, Globe, Link, Trash2, X, Plus } from 'lucide-react';
+import { Mail, Phone, Printer, Globe, Link, Trash2 } from 'lucide-react';
 
 interface Props {
   data: BusinessCardData;
@@ -44,7 +44,7 @@ function Input({ label, icon, value, onChange, placeholder, type = 'text' }: {
 }
 
 export default function FieldsPanel({ data, updateField, updateSocial, updateAddress }: Props) {
-  const [showNetworkPicker, setShowNetworkPicker] = useState(false);
+  const addSelectRef = useRef<HTMLSelectElement>(null);
 
   const addedNetworkIds = Object.keys(data.social ?? {});
   const availableNetworks = SOCIAL_NETWORK_IDS.filter(id => !addedNetworkIds.includes(id));
@@ -52,7 +52,7 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
   const handleAddNetwork = (networkId: string) => {
     if (!networkId) return;
     updateField('social', { ...(data.social ?? {}), [networkId]: '' });
-    setShowNetworkPicker(false);
+    if (addSelectRef.current) addSelectRef.current.value = '';
   };
 
   const handleRemoveNetwork = (networkId: string) => {
@@ -137,36 +137,22 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
             );
           })}
 
-          {showNetworkPicker ? (
-            <div className="flex items-center gap-2 mt-2">
+          {availableNetworks.length > 0 && (
+            <div className="mt-2">
               <select
-                autoFocus
+                ref={addSelectRef}
                 onChange={e => handleAddNetwork(e.target.value)}
                 defaultValue=""
-                className="flex-1 px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="" disabled>Select a network...</option>
+                <option value="" disabled>Add network...</option>
                 {availableNetworks.map(id => {
                   const net = getSocialNetwork(id);
                   return <option key={id} value={id}>{net?.name ?? id}</option>;
                 })}
               </select>
-              <button
-                onClick={() => setShowNetworkPicker(false)}
-                className="p-2 text-slate-400 hover:text-slate-600 rounded-lg transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
-          ) : availableNetworks.length > 0 ? (
-            <button
-              onClick={() => setShowNetworkPicker(true)}
-              className="mt-1 flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-dashed border-blue-300 w-full"
-            >
-              <Plus className="w-3 h-3" />
-              Add Network
-            </button>
-          ) : null}
+          )}
         </div>
       </section>
     </div>

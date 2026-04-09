@@ -54,7 +54,7 @@ export default function MoreLayouts({ design, data, onLayoutChange, useBranding,
   const entries = Object.entries(layoutsByCategory);
   if (entries.length === 0) return null;
 
-  const previewData = (data.firstName || data.lastName) ? data : getSampleData(0);
+  const previewData = brandingOn ? data : ((data.firstName || data.lastName) ? data : getSampleData(0));
 
   return (
     <div className="mt-8">

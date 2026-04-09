@@ -1,7 +1,7 @@
 import type { BusinessCardData } from '../../types/card';
 import type { ColorPalette, Region } from '../../types/template';
 
-type IconStyle = 'prefix' | 'solid' | 'outline' | 'none';
+type IconStyle = 'solid' | 'outline' | 'none';
 
 interface Props {
   data: BusinessCardData;
@@ -44,7 +44,7 @@ const ICON_GAP = 1.0;
 
 type LineEntry = { text: string; iconKey: string };
 
-export default function ContactInfo({ data, colors, bodyFont, region, iconStyle = 'prefix', fontSizeOverride }: Props) {
+export default function ContactInfo({ data, colors, bodyFont, region, iconStyle = 'none', fontSizeOverride }: Props) {
   const bodySize = fontSizeOverride ?? BODY_SIZE;
   const lineH = bodySize * 1.45;
   const entries: LineEntry[] = [];
@@ -54,7 +54,7 @@ export default function ContactInfo({ data, colors, bodyFont, region, iconStyle 
   if (data.website) entries.push({ text: data.website, iconKey: 'globe' });
   if (data.address) {
     const addr = data.address;
-    entries.push({ text: addr.line1, iconKey: 'locationDot' });
+    if (addr.line1?.trim()) entries.push({ text: addr.line1, iconKey: 'locationDot' });
     if (addr.line2) entries.push({ text: addr.line2, iconKey: 'locationDot' });
     const cityState = [addr.city, addr.state].filter(Boolean).join(', ');
     const cityLine = [cityState, addr.zip].filter(Boolean).join(' ');

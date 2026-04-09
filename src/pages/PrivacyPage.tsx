@@ -11,7 +11,7 @@ export default function PrivacyPage() {
       <div className="prose prose-slate max-w-none space-y-6 text-slate-700 text-sm leading-relaxed">
         <section>
           <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">Overview</h2>
-          <p>BCard is a fully client-side application. Your data never leaves your browser. We do not operate servers that receive, process, or store any of your personal information or business card data.</p>
+          <p>Your business card data never leaves your browser. We use Google Analytics for aggregate site statistics only. BCard does not operate servers that receive, process, or store any of your personal information or business card data.</p>
         </section>
 
         <section>
@@ -28,12 +28,17 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">External Services</h2>
-          <p>BCard loads fonts from Google Fonts to render templates. This means your browser makes requests to Google's servers to download font files. Google's privacy policy governs how they handle those requests. No business card data is sent to Google.</p>
+          <p>BCard uses the following external services:</p>
+          <ul className="list-disc pl-6 mt-2 space-y-1">
+            <li><strong>Google Fonts</strong> — BCard loads fonts from Google Fonts to render templates. This means your browser makes requests to Google's servers to download font files. Google's privacy policy governs how they handle those requests. No business card data is sent to Google.</li>
+            <li><strong>Google Analytics</strong> — With your consent, BCard uses Google Analytics to understand how the site is used. See the Cookies &amp; Tracking section below for details.</li>
+          </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">Cookies & Tracking</h2>
-          <p>BCard does not use cookies, analytics, tracking pixels, or any form of user tracking. There are no third-party scripts for advertising or analytics.</p>
+          <h2 className="text-lg font-semibold text-slate-900 mt-8 mb-3">Cookies &amp; Tracking</h2>
+          <p>BCard uses Google Analytics to understand how the site is used. Analytics are only loaded if you consent via the cookie banner. Google Analytics may set cookies and collect usage data including pages visited, time on site, and general location. See <a href="https://policies.google.com/privacy" className="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">Google's privacy policy</a> for details. You can withdraw consent at any time by clearing your browser's localStorage (specifically the <code>bcard-cookie-consent</code> key).</p>
+          <p className="mt-2">If you decline analytics, no tracking cookies are set and no analytics data is collected.</p>
         </section>
 
         <section>

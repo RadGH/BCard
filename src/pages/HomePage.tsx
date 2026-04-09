@@ -1,10 +1,30 @@
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllFrontLayouts, getAllBackLayouts } from '../templates/registry';
+import { getAllFrontLayouts, getAllBackLayouts, resolveColorPalette } from '../templates/registry';
 import ShowcaseGrid from '../components/showcase/ShowcaseGrid';
+import { useCardDataContext } from '../context/CardDataContext';
+import { getBrandingPref, setBrandingPref } from '../lib/branding-prefs';
 
 export default function HomePage() {
   const frontCount = getAllFrontLayouts().length;
   const backCount = getAllBackLayouts().length;
+  const { data, design } = useCardDataContext();
+
+  const hasCardData = Boolean(
+    data.firstName?.trim() || data.lastName?.trim() || data.company?.trim() || data.email?.trim()
+  );
+
+  const [useBranding, setUseBranding] = useState(() => getBrandingPref());
+
+  const handleToggleBranding = (v: boolean) => {
+    setUseBranding(v);
+    setBrandingPref(v);
+  };
+
+  const brandingPalette = useMemo(
+    () => (useBranding && hasCardData) ? resolveColorPalette(design.paletteId, design.customColors) : undefined,
+    [useBranding, hasCardData, design.paletteId, design.customColors]
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
@@ -23,7 +43,26 @@ export default function HomePage() {
         </Link>
       </section>
 
-      <ShowcaseGrid />
+      {hasCardData && (
+        <div className="flex justify-end mb-4">
+          <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={useBranding}
+              onChange={e => handleToggleBranding(e.target.checked)}
+              className="rounded"
+            />
+            Use my branding
+          </label>
+        </div>
+      )}
+
+      <ShowcaseGrid
+        brandingData={useBranding && hasCardData ? data : undefined}
+        brandingPalette={brandingPalette}
+        brandingTitleFont={useBranding && hasCardData ? design.titleFont : undefined}
+        brandingBodyFont={useBranding && hasCardData ? design.bodyFont : undefined}
+      />
     </div>
   );
 }

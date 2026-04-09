@@ -8,7 +8,9 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import DemoAssetsPage from './pages/DemoAssetsPage';
+import HeroPage from './pages/HeroPage';
 import StickyPreview from './components/StickyPreview';
+import CookieBanner from './components/CookieBanner';
 import { CardDataProvider, useCardDataContext } from './context/CardDataContext';
 import type { BusinessCardData, CardDesign } from './types/card';
 
@@ -57,6 +59,7 @@ function StickyPreviewWrapper() {
     const snap: Snapshot = { data, design };
     writeSnapshot(snap);
     setSnapshot(snap);
+    window.dispatchEvent(new CustomEvent('bcard-checkpoint', { detail: { data, design } }));
     window.dispatchEvent(new CustomEvent('bcard-widget-save', { detail: { data, design } }));
   }, [data, design]);
 
@@ -131,9 +134,11 @@ export default function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/demo-assets" element={<DemoAssetsPage />} />
+          <Route path="/hero" element={<HeroPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <StickyPreviewWrapper />
+        <CookieBanner />
       </AppShell>
     </CardDataProvider>
   );

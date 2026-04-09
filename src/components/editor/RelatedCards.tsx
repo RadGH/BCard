@@ -53,7 +53,7 @@ export default function SimilarLayouts({
       .slice(0, 6);
   }, [design.frontLayoutId]);
 
-  const previewData = (data.firstName || data.lastName) ? data : getSampleData(0);
+  const previewData = brandingOn ? data : ((data.firstName || data.lastName) ? data : getSampleData(0));
 
   if (similar.length === 0) return null;
 

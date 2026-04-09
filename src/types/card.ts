@@ -82,9 +82,11 @@ export interface CardDesign {
   backgroundFlipV?: boolean;
   backgroundAppliesTo?: 'both' | 'front' | 'back';  // Default: 'both'
   logoColorOverride?: string;  // When set, override logo color (tint)
-  iconStyle?: 'prefix' | 'solid' | 'outline' | 'none';
+  iconStyle?: 'solid' | 'outline' | 'none';
   frontFontSizes?: Partial<CardFontSizes>;
   backFontSizes?: Partial<CardFontSizes>;
+  frontImageScales?: { portrait?: number; logo?: number; qr?: number; background?: number };
+  backImageScales?: { portrait?: number; logo?: number; qr?: number; background?: number };
   createdAt: number;
   updatedAt: number;
 }
