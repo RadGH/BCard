@@ -10,12 +10,16 @@ interface Props {
   colors: ColorPalette;
   titleFont: string;
   colorOverride?: string;
+  scale?: number;
 }
 
-export default function LogoSlot({ src, companyName, useTextLogo = true, region, colors, titleFont, colorOverride }: Props) {
+export default function LogoSlot({ src, companyName, useTextLogo = true, region, colors, titleFont, colorOverride, scale = 1 }: Props) {
   if (src) {
+    const cx = region.x + region.width / 2;
+    const cy = region.y + region.height / 2;
+    const scaleTransform = scale !== 1 ? `translate(${cx} ${cy}) scale(${scale}) translate(${-cx} ${-cy})` : undefined;
     return (
-      <>
+      <g transform={scaleTransform}>
         <image
           href={resolvePublicUrl(src)}
           x={region.x}
@@ -34,7 +38,7 @@ export default function LogoSlot({ src, companyName, useTextLogo = true, region,
             style={{ mixBlendMode: 'color' } as React.CSSProperties}
           />
         )}
-      </>
+      </g>
     );
   }
 

@@ -23,11 +23,13 @@ export async function generateSvgString(
   const frontBgOptions = {
     ...(appliesTo === 'back' ? { ...baseBgOptions, backgroundId: undefined } : baseBgOptions),
     fontSizes: cardDesign.frontFontSizes,
+    imageScales: cardDesign.frontImageScales,
   };
 
   const backBgOptions = {
     ...(appliesTo === 'front' ? { ...baseBgOptions, backgroundId: undefined } : baseBgOptions),
     fontSizes: cardDesign.backFontSizes,
+    imageScales: cardDesign.backImageScales,
   };
 
   let element: React.ReactElement;

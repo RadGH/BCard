@@ -63,12 +63,14 @@ export default function CardPreview({ data, design, showPrintMargins = false, vi
   const frontBgOptions = useMemo(() => ({
     ...(appliesTo === 'back' ? { ...bgOptions, backgroundId: undefined } : bgOptions),
     fontSizes: design.frontFontSizes,
-  }), [bgOptions, appliesTo, design.frontFontSizes]);
+    imageScales: design.frontImageScales,
+  }), [bgOptions, appliesTo, design.frontFontSizes, design.frontImageScales]);
 
   const backBgOptions = useMemo(() => ({
     ...(appliesTo === 'front' ? { ...bgOptions, backgroundId: undefined } : bgOptions),
     fontSizes: design.backFontSizes,
-  }), [bgOptions, appliesTo, design.backFontSizes]);
+    imageScales: design.backImageScales,
+  }), [bgOptions, appliesTo, design.backFontSizes, design.backImageScales]);
 
   const frontSvg = useMemo(() => {
     if (!frontLayout) return null;

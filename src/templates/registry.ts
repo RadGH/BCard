@@ -53,11 +53,19 @@ export function resolveColorPalette(
 
 // ─── Region renderer ─────────────────────────────────────────────────────────
 
+interface ImageScales {
+  portrait?: number;
+  logo?: number;
+  qr?: number;
+  background?: number;
+}
+
 interface RenderOptions {
   useTextLogo?: boolean;
   logoColorOverride?: string;
   iconStyle?: string;
   fontSizes?: Partial<CardFontSizes>;
+  imageScales?: ImageScales;
 }
 
 function renderRegion(
@@ -102,6 +110,7 @@ function renderRegion(
         src: data.portrait,
         region: regionObj,
         clipShape: regionObj.clipShape ?? 'rect',
+        scale: options?.imageScales?.portrait ?? 1,
       });
 
     case 'logo':
@@ -114,6 +123,7 @@ function renderRegion(
         region: regionObj,
         colors,
         titleFont,
+        scale: options?.imageScales?.logo ?? 1,
       });
 
     case 'tagline':
@@ -137,7 +147,11 @@ function renderRegion(
       }
 
       if (!src) return React.createElement('g', { key: 'qr' });
-      return React.createElement('image', { key: 'qr', href: src, x: regionObj.x, y: regionObj.y, width: regionObj.width, height: regionObj.height, preserveAspectRatio: 'xMidYMid meet' });
+      const qrScale = options?.imageScales?.qr ?? 1;
+      const qrCx = regionObj.x + regionObj.width / 2;
+      const qrCy = regionObj.y + regionObj.height / 2;
+      const qrTransform = qrScale !== 1 ? `translate(${qrCx} ${qrCy}) scale(${qrScale}) translate(${-qrCx} ${-qrCy})` : undefined;
+      return React.createElement('image', { key: 'qr', href: src, x: regionObj.x, y: regionObj.y, width: regionObj.width, height: regionObj.height, preserveAspectRatio: 'xMidYMid meet', transform: qrTransform });
     }
 
     case 'credentials':
@@ -172,6 +186,7 @@ export interface BackgroundOptions {
   logoColorOverride?: string;
   iconStyle?: string;
   fontSizes?: Partial<CardFontSizes>;
+  imageScales?: ImageScales;
 }
 
 export function renderFront(
@@ -195,6 +210,7 @@ export function renderFront(
     logoColorOverride: bgOptions?.logoColorOverride,
     iconStyle: bgOptions?.iconStyle,
     fontSizes: bgOptions?.fontSizes,
+    imageScales: bgOptions?.imageScales,
   };
 
   const regions = layout.regions.map((region, i) =>
@@ -254,6 +270,7 @@ export function renderBack(
     logoColorOverride: bgOptions?.logoColorOverride,
     iconStyle: bgOptions?.iconStyle,
     fontSizes: bgOptions?.fontSizes,
+    imageScales: bgOptions?.imageScales,
   };
 
   const regions = layout.regions.map((region, i) =>

@@ -5,9 +5,10 @@ interface Props {
   src?: string;
   region: Region;
   clipShape?: 'rect' | 'circle' | 'rounded';
+  scale?: number;
 }
 
-export default function PhotoSlot({ src, region, clipShape = 'rect' }: Props) {
+export default function PhotoSlot({ src, region, clipShape = 'rect', scale = 1 }: Props) {
   if (!src) return null;
 
   // Use a stable unique ID based on position so multiple slots don't collide
@@ -16,6 +17,7 @@ export default function PhotoSlot({ src, region, clipShape = 'rect' }: Props) {
   const cy = region.y + region.height / 2;
   const r = Math.min(region.width, region.height) / 2;
   const rx = clipShape === 'rounded' ? 2 : 0;
+  const scaleTransform = scale !== 1 ? `translate(${cx} ${cy}) scale(${scale}) translate(${-cx} ${-cy})` : undefined;
 
   return (
     <g>
@@ -36,6 +38,7 @@ export default function PhotoSlot({ src, region, clipShape = 'rect' }: Props) {
         height={region.height}
         preserveAspectRatio="xMidYMid slice"
         clipPath={`url(#${clipId})`}
+        transform={scaleTransform}
       />
     </g>
   );
