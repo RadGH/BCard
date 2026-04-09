@@ -254,6 +254,42 @@ export default function AdvancedPanel({ design, onDesignChange, side: sideProp, 
 
   return (
     <div className="space-y-5">
+      {/* Export / Import section */}
+      {data && onDataChange && (
+        <section className="border border-slate-200 rounded-lg p-4">
+          <h3 className="text-sm font-semibold text-slate-700 mb-3">Export / Import</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={handleExport}
+              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              <Download className="w-4 h-4" aria-hidden="true" />
+              Export Card
+            </button>
+            <button
+              onClick={handleImportClick}
+              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              <Upload className="w-4 h-4" aria-hidden="true" />
+              Import Card
+            </button>
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".json"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+          </div>
+          {importMessage && (
+            <p className={`mt-2 text-xs font-medium ${importMessage.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+              {importMessage.text}
+            </p>
+          )}
+          <p className="text-xs text-slate-400 mt-2">Export saves all card data and settings to JSON. Import replaces the current card entirely.</p>
+        </section>
+      )}
+
       {/* Side subtabs */}
       <div className="flex border-b border-slate-200">
         {(['front', 'back'] as Side[]).map(s => (
@@ -316,41 +352,6 @@ export default function AdvancedPanel({ design, onDesignChange, side: sideProp, 
         <p className="text-xs text-slate-400 mt-3">Scale 1.00 = default. Blue values are custom overrides.</p>
       </section>
 
-      {/* Export / Import section */}
-      {data && onDataChange && (
-        <section className="border-t border-slate-200 pt-5">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">Export / Import</h3>
-          <div className="flex gap-2">
-            <button
-              onClick={handleExport}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
-            >
-              <Download className="w-4 h-4" aria-hidden="true" />
-              Export Card
-            </button>
-            <button
-              onClick={handleImportClick}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
-            >
-              <Upload className="w-4 h-4" aria-hidden="true" />
-              Import Card
-            </button>
-            <input
-              ref={fileRef}
-              type="file"
-              accept=".json"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-          </div>
-          {importMessage && (
-            <p className={`mt-2 text-xs font-medium ${importMessage.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-              {importMessage.text}
-            </p>
-          )}
-          <p className="text-xs text-slate-400 mt-2">Export saves all card data and design settings to a JSON file. Import replaces the current card entirely.</p>
-        </section>
-      )}
     </div>
   );
 }
