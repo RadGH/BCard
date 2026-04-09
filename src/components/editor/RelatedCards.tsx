@@ -71,7 +71,7 @@ export default function SimilarLayouts({
           Use my branding
         </label>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {similar.map(layout => {
           const palette = brandingOn
             ? userPalette
