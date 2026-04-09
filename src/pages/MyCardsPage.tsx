@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Plus, SquarePen, Trash2, CreditCard } from 'lucide-react';
 import { renderFront, renderBack, getFrontLayout, getBackLayout, resolveColorPalette } from '../templates/registry';
 import type { BusinessCardData, CardDesign } from '../types/card';
 
@@ -107,14 +108,14 @@ export default function MyCardsPage() {
           onClick={() => navigate('/editor')}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
         >
-          <i className="fa-solid fa-plus mr-1.5 text-xs" />
+          <Plus className="inline w-3 h-3 mr-1.5" />
           New Card
         </button>
       </div>
 
       {cards.length === 0 ? (
         <div className="text-center py-20 text-slate-400">
-          <i className="fa-regular fa-credit-card text-4xl mb-4 block" />
+          <CreditCard className="w-10 h-10 mb-4 mx-auto" />
           <p className="text-lg font-medium mb-1">No saved cards yet</p>
           <p className="text-sm mb-4">Create and save a card in the editor to see it here.</p>
           <button
@@ -139,7 +140,7 @@ export default function MyCardsPage() {
                     onClick={() => handleEdit(card)}
                     className="flex-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors"
                   >
-                    <i className="fa-solid fa-pen-to-square mr-1 text-xs" />
+                    <SquarePen className="inline w-3 h-3 mr-1" />
                     Edit
                   </button>
                   {/* A01: Delete button with aria-label */}
@@ -149,7 +150,7 @@ export default function MyCardsPage() {
                     title="Delete card"
                     className="px-2 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                   >
-                    <i className="fa-solid fa-trash text-xs" aria-hidden="true" />
+                    <Trash2 className="w-3 h-3" aria-hidden="true" />
                   </button>
                 </div>
               </div>

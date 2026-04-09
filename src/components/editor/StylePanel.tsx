@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Pencil, Trash2, Plus, ChevronUp, ChevronDown, ChevronRight } from 'lucide-react';
 import type { ColorPalette } from '../../types/template';
 import type { CardDesign } from '../../types/card';
 import type { SavedPalette } from '../../hooks/useStylePresets';
@@ -121,7 +122,7 @@ export default function StylePanel({
                   title="Rename palette"
                   className="p-1 text-slate-400 hover:text-slate-600 rounded transition-colors shrink-0"
                 >
-                  <i className="fa-solid fa-pencil text-xs" aria-hidden="true" />
+                  <Pencil className="w-3 h-3" aria-hidden="true" />
                 </button>
                 {/* A01: Delete button with aria-label */}
                 <button
@@ -130,7 +131,7 @@ export default function StylePanel({
                   title="Delete Palette"
                   className="p-1 text-red-400 hover:text-red-600 rounded transition-colors shrink-0"
                 >
-                  <i className="fa-solid fa-trash text-xs" aria-hidden="true" />
+                  <Trash2 className="w-3 h-3" aria-hidden="true" />
                 </button>
               </div>
             ))}
@@ -139,7 +140,7 @@ export default function StylePanel({
             onClick={() => { setShowSaveInput(true); }}
             className="mt-2 flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg border border-dashed border-blue-300 w-full transition-colors"
           >
-            <i className="fa-solid fa-plus text-xs" /> Add New Palette
+            <Plus className="w-3 h-3" /> Add New Palette
           </button>
         </section>
       )}
@@ -179,7 +180,7 @@ export default function StylePanel({
             onClick={() => setShowAllBuiltIn(v => !v)}
             className="mt-2 text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1 transition-colors"
           >
-            <i className={`fa-solid fa-chevron-${showAllBuiltIn ? 'up' : 'down'} text-xs`} />
+            {showAllBuiltIn ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
             {showAllBuiltIn ? 'Show fewer' : `Show all ${allPalettes.length} palettes`}
           </button>
         )}
@@ -193,7 +194,7 @@ export default function StylePanel({
           aria-controls="custom-colors-panel"
           className="flex items-center gap-2 text-sm font-semibold text-slate-700 w-full text-left mb-1"
         >
-          <i className={`fa-solid fa-chevron-${showCustomColors ? 'up' : 'right'} text-xs text-slate-400`} />
+          {showCustomColors ? <ChevronUp className="w-3 h-3 text-slate-400" /> : <ChevronRight className="w-3 h-3 text-slate-400" />}
           Custom Color Overrides
           {hasCustomColors && <span className="text-xs text-blue-600 font-normal ml-1">({Object.keys(design.customColors!).length} override{Object.keys(design.customColors!).length > 1 ? 's' : ''})</span>}
         </button>

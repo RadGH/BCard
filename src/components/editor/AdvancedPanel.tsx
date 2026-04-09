@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RotateCcw } from 'lucide-react';
 import type { CardDesign, CardFontSizes } from '../../types/card';
 import { DEFAULT_FONT_SIZES } from '../../types/card';
 
@@ -70,7 +71,7 @@ function SizeControl({
           title="Reset to default"
           className="text-xs text-slate-400 hover:text-slate-600 transition-colors ml-1"
         >
-          <i className="fa-solid fa-rotate-left" aria-hidden="true" />
+          <RotateCcw className="w-3 h-3" aria-hidden="true" />
         </button>
       )}
       {!isCustom && <span className="text-xs text-slate-300 ml-1 w-4">—</span>}
@@ -138,7 +139,7 @@ export default function AdvancedPanel({ design, onDesignChange }: Props) {
             />
           ))}
         </div>
-        <p className="text-xs text-slate-400 mt-3">Blue values are custom overrides. Click <i className="fa-solid fa-rotate-left" /> to reset individual items.</p>
+        <p className="text-xs text-slate-400 mt-3">Blue values are custom overrides. Click <RotateCcw className="inline w-3 h-3" /> to reset individual items.</p>
       </section>
     </div>
   );

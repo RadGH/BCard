@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useCallback, useEffect, memo } from 'react';
+import { Palette } from 'lucide-react';
 import type { FrontLayout, BackLayout, ColorPalette } from '../../types/template';
 import type { BusinessCardData, CardDesign } from '../../types/card';
 import {
@@ -228,7 +229,7 @@ export default function TemplateSelector({ design, data, onDesignChange }: Props
             onChange={e => setUseBranding(e.target.checked)}
             className="rounded"
           />
-          <i className="fa-solid fa-palette text-slate-400" />
+          <Palette className="w-4 h-4 text-slate-400" />
           Use my branding
         </label>
       </div>

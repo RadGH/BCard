@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Save, Copy, Trash2 } from 'lucide-react';
 import { useCardDataContext } from '../../context/CardDataContext';
 import { usePeople } from '../../hooks/usePeople';
 import { useStylePresets } from '../../hooks/useStylePresets';
@@ -196,7 +197,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                 title={activeSavedCardId ? 'Update saved card' : 'Save card'}
                 className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
               >
-                <i className="fa-solid fa-floppy-disk text-sm" aria-hidden="true" />
+                <Save className="w-4 h-4" aria-hidden="true" />
               </button>
               {activeSavedCardId && (
                 <>
@@ -207,7 +208,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                     title="Save as new card"
                     className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   >
-                    <i className="fa-solid fa-copy text-sm" aria-hidden="true" />
+                    <Copy className="w-4 h-4" aria-hidden="true" />
                   </button>
                   {/* Delete button - A01 */}
                   <button
@@ -216,7 +217,7 @@ export default function CardEditor({ initialFrontLayoutId }: Props) {
                     title="Delete card"
                     className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                   >
-                    <i className="fa-solid fa-trash text-sm" aria-hidden="true" />
+                    <Trash2 className="w-4 h-4" aria-hidden="true" />
                   </button>
                 </>
               )}

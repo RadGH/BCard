@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { BusinessCardData } from '../../types/card';
 import { SOCIAL_NETWORK_IDS, getSocialNetwork } from '../../constants/social-networks';
+import { Mail, Phone, Printer, Globe, Link, Trash2, X, Plus } from 'lucide-react';
 
 interface Props {
   data: BusinessCardData;
@@ -9,10 +10,10 @@ interface Props {
   updateAddress: (field: string, value: string) => void;
 }
 
-function FieldLabel({ icon, children }: { icon: string; children: React.ReactNode }) {
+function FieldLabel({ icon, children }: { icon?: React.ReactNode; children: React.ReactNode }) {
   return (
     <span className="text-xs font-medium text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
-      <i className={`${icon} w-3 opacity-60`} />
+      {icon && <span className="opacity-60 flex items-center">{icon}</span>}
       {children}
     </span>
   );
@@ -20,7 +21,7 @@ function FieldLabel({ icon, children }: { icon: string; children: React.ReactNod
 
 function Input({ label, icon, value, onChange, placeholder, type = 'text' }: {
   label: string;
-  icon?: string;
+  icon?: React.ReactNode;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -79,10 +80,10 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
       <section>
         <h3 className="text-sm font-semibold text-slate-700 mb-3">Contact</h3>
         <div className="space-y-3">
-          <Input label="Email" icon="fa-solid fa-envelope" value={data.email} onChange={v => updateField('email', v)} placeholder="sarah@nexusdyn.com" />
-          <Input label="Phone" icon="fa-solid fa-phone" value={data.phone} onChange={v => updateField('phone', v)} placeholder="(415) 555-0142" />
-          <Input label="Fax" icon="fa-solid fa-fax" value={data.fax ?? ''} onChange={v => updateField('fax', v || undefined)} placeholder="(415) 555-0143" />
-          <Input label="Website" icon="fa-solid fa-globe" value={data.website ?? ''} onChange={v => updateField('website', v || undefined)} placeholder="www.nexusdyn.com" />
+          <Input label="Email" icon={<Mail className="w-3 h-3" />} value={data.email} onChange={v => updateField('email', v)} placeholder="sarah@nexusdyn.com" />
+          <Input label="Phone" icon={<Phone className="w-3 h-3" />} value={data.phone} onChange={v => updateField('phone', v)} placeholder="(415) 555-0142" />
+          <Input label="Fax" icon={<Printer className="w-3 h-3" />} value={data.fax ?? ''} onChange={v => updateField('fax', v || undefined)} placeholder="(415) 555-0143" />
+          <Input label="Website" icon={<Globe className="w-3 h-3" />} value={data.website ?? ''} onChange={v => updateField('website', v || undefined)} placeholder="www.nexusdyn.com" />
         </div>
       </section>
 
@@ -106,11 +107,13 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
             const network = getSocialNetwork(networkId);
             return (
               <div key={networkId} className="flex items-center gap-2">
-                <span className="w-6 flex items-center justify-center shrink-0">
+                <span className="w-6 flex items-center justify-center shrink-0 text-slate-400">
                   {network ? (
-                    <i className={`${network.faClass} text-slate-400`} />
+                    <svg viewBox={network.viewBox} className="w-4 h-4 fill-current">
+                      <path d={network.svgPath} />
+                    </svg>
                   ) : (
-                    <i className="fa-solid fa-link text-slate-400" />
+                    <Link className="w-4 h-4" />
                   )}
                 </span>
                 <span className="text-xs font-medium text-slate-500 w-20 shrink-0">
@@ -128,7 +131,7 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
                   className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   title="Remove network"
                 >
-                  <i className="fa-solid fa-trash text-xs" />
+                  <Trash2 className="w-3 h-3" />
                 </button>
               </div>
             );
@@ -152,7 +155,7 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
                 onClick={() => setShowNetworkPicker(false)}
                 className="p-2 text-slate-400 hover:text-slate-600 rounded-lg transition-colors"
               >
-                <i className="fa-solid fa-xmark" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           ) : availableNetworks.length > 0 ? (
@@ -160,7 +163,7 @@ export default function FieldsPanel({ data, updateField, updateSocial, updateAdd
               onClick={() => setShowNetworkPicker(true)}
               className="mt-1 flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-dashed border-blue-300 w-full"
             >
-              <i className="fa-solid fa-plus text-xs" />
+              <Plus className="w-3 h-3" />
               Add Network
             </button>
           ) : null}

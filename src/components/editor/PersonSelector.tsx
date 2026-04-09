@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Save, Copy, Trash2 } from 'lucide-react';
 import type { PersonData, BusinessCardData } from '../../types/card';
 import { cardDataToPerson } from '../../types/card';
 import { generateDemoPerson } from '../../lib/demo-data';
@@ -76,19 +77,19 @@ export default function PersonSelector({
         {activePersonId && (
           <>
             <button onClick={handleUpdateCurrent} title="Save Changes" className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors">
-              <i className="fa-solid fa-floppy-disk text-sm" />
+              <Save className="w-4 h-4" />
             </button>
             <button onClick={() => setShowSave(true)} title="Save as New Person" className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-              <i className="fa-solid fa-copy text-sm" />
+              <Copy className="w-4 h-4" />
             </button>
             <button onClick={() => onDeletePerson(activePersonId)} title="Delete Person" className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-              <i className="fa-solid fa-trash text-sm" />
+              <Trash2 className="w-4 h-4" />
             </button>
           </>
         )}
         {!activePersonId && (
           <button onClick={() => setShowSave(true)} title="Save Person" className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-            <i className="fa-solid fa-floppy-disk text-sm" />
+            <Save className="w-4 h-4" />
           </button>
         )}
       </div>

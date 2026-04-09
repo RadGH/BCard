@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { RefreshCw, Upload } from 'lucide-react';
 import type { QRCodeData } from '../../types/card';
 
 interface Props {
@@ -117,7 +118,7 @@ export default function QRCodeField({ value, onChange }: Props) {
               <span className="text-xs text-slate-500">Foreground</span>
             </label>
             <button onClick={handleInvert} className="px-2 py-1 text-xs bg-slate-100 hover:bg-slate-200 rounded transition-colors" title="Swap colors">
-              <i className="fa-solid fa-arrows-rotate" />
+              <RefreshCw className="w-4 h-4" />
             </button>
             <label className="flex items-center gap-2">
               <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
@@ -139,7 +140,7 @@ export default function QRCodeField({ value, onChange }: Props) {
       {inputType === 'image' && (
         <div>
           <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-colors">
-            <i className="fa-solid fa-upload text-slate-400 mb-1" />
+            <Upload className="w-4 h-4 text-slate-400 mb-1" />
             <span className="text-xs text-slate-500">Click to upload QR image</span>
             <input type="file" accept="image/*,.svg" className="hidden" onChange={handleFileUpload} />
           </label>

@@ -1,7 +1,6 @@
 export interface SocialNetwork {
   id: string;
   name: string;
-  faClass: string;
   prefix: string;
   placeholder: string;
   viewBox: string;
@@ -12,7 +11,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'linkedin',
     name: 'LinkedIn',
-    faClass: 'fa-brands fa-linkedin',
     prefix: 'in/',
     placeholder: 'username',
     viewBox: '0 0 448 512',
@@ -21,7 +19,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'github',
     name: 'GitHub',
-    faClass: 'fa-brands fa-github',
     prefix: 'gh/',
     placeholder: 'username',
     viewBox: '0 0 496 512',
@@ -30,7 +27,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'twitter',
     name: 'X (Twitter)',
-    faClass: 'fa-brands fa-x-twitter',
     prefix: '@',
     placeholder: 'handle',
     viewBox: '0 0 512 512',
@@ -39,7 +35,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'instagram',
     name: 'Instagram',
-    faClass: 'fa-brands fa-instagram',
     prefix: 'ig/',
     placeholder: 'username',
     viewBox: '0 0 448 512',
@@ -48,7 +43,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'facebook',
     name: 'Facebook',
-    faClass: 'fa-brands fa-facebook',
     prefix: 'fb/',
     placeholder: 'username',
     viewBox: '0 0 512 512',
@@ -57,7 +51,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'youtube',
     name: 'YouTube',
-    faClass: 'fa-brands fa-youtube',
     prefix: 'yt/',
     placeholder: 'channel',
     viewBox: '0 0 576 512',
@@ -66,7 +59,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'tiktok',
     name: 'TikTok',
-    faClass: 'fa-brands fa-tiktok',
     prefix: 'tt/',
     placeholder: 'username',
     viewBox: '0 0 448 512',
@@ -75,7 +67,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'discord',
     name: 'Discord',
-    faClass: 'fa-brands fa-discord',
     prefix: 'discord/',
     placeholder: 'username',
     viewBox: '0 0 640 512',
@@ -84,7 +75,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'slack',
     name: 'Slack',
-    faClass: 'fa-brands fa-slack',
     prefix: 'slack/',
     placeholder: 'workspace',
     viewBox: '0 0 448 512',
@@ -93,7 +83,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'whatsapp',
     name: 'WhatsApp',
-    faClass: 'fa-brands fa-whatsapp',
     prefix: 'wa/',
     placeholder: 'number',
     viewBox: '0 0 448 512',
@@ -102,7 +91,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'telegram',
     name: 'Telegram',
-    faClass: 'fa-brands fa-telegram',
     prefix: 't.me/',
     placeholder: 'username',
     viewBox: '0 0 496 512',
@@ -111,7 +99,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'bluesky',
     name: 'Bluesky',
-    faClass: 'fa-brands fa-bluesky',
     prefix: 'bsky/',
     placeholder: 'handle',
     viewBox: '0 0 576 512',
@@ -120,7 +107,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'mastodon',
     name: 'Mastodon',
-    faClass: 'fa-brands fa-mastodon',
     prefix: '@',
     placeholder: 'user@instance',
     viewBox: '0 0 448 512',
@@ -129,7 +115,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'behance',
     name: 'Behance',
-    faClass: 'fa-brands fa-behance',
     prefix: 'be/',
     placeholder: 'username',
     viewBox: '0 0 576 512',
@@ -138,7 +123,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'dribbble',
     name: 'Dribbble',
-    faClass: 'fa-brands fa-dribbble',
     prefix: 'drb/',
     placeholder: 'username',
     viewBox: '0 0 512 512',
@@ -147,7 +131,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'medium',
     name: 'Medium',
-    faClass: 'fa-brands fa-medium',
     prefix: '@',
     placeholder: 'username',
     viewBox: '0 0 640 512',
@@ -156,7 +139,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'twitch',
     name: 'Twitch',
-    faClass: 'fa-brands fa-twitch',
     prefix: 'twitch/',
     placeholder: 'username',
     viewBox: '0 0 512 512',
@@ -165,7 +147,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'threads',
     name: 'Threads',
-    faClass: 'fa-brands fa-threads',
     prefix: '@',
     placeholder: 'username',
     viewBox: '0 0 448 512',
@@ -174,7 +155,6 @@ const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: 'pinterest',
     name: 'Pinterest',
-    faClass: 'fa-brands fa-pinterest',
     prefix: 'pin/',
     placeholder: 'username',
     viewBox: '0 0 496 512',

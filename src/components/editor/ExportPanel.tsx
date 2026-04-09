@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChevronUp, ChevronRight, Download, Upload, Trash2 } from 'lucide-react';
 import type { BusinessCardData, CardDesign } from '../../types/card';
 import { generateSvgString, downloadBlob, svgToPng, printSvg } from '../../lib/svg-export';
 import { downloadPdf } from '../../lib/pdf-export';
@@ -224,7 +225,7 @@ export default function ExportPanel({ data, design, showPrintMargins = false, on
           aria-controls="advanced-panel"
           className="flex items-center gap-2 text-sm font-semibold text-slate-700 w-full text-left"
         >
-          <i className={`fa-solid fa-chevron-${showAdvanced ? 'up' : 'right'} text-xs text-slate-400`} />
+          {showAdvanced ? <ChevronUp className="w-3 h-3 text-slate-400" /> : <ChevronRight className="w-3 h-3 text-slate-400" />}
           Advanced
         </button>
         {showAdvanced && (
@@ -233,11 +234,11 @@ export default function ExportPanel({ data, design, showPrintMargins = false, on
               onClick={handleExportAll}
               className="w-full px-4 py-2.5 text-sm font-medium bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
             >
-              <i className="fa-solid fa-download mr-2" />
+              <Download className="inline w-4 h-4 mr-2" />
               Export All Settings (JSON)
             </button>
             <label className="w-full px-4 py-2.5 text-sm font-medium bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors cursor-pointer flex items-center justify-center gap-2">
-              <i className="fa-solid fa-upload" />
+              <Upload className="inline w-4 h-4" />
               Import Settings (JSON)
               <input type="file" accept=".json" className="hidden" onChange={handleImportJson} />
             </label>
@@ -245,7 +246,7 @@ export default function ExportPanel({ data, design, showPrintMargins = false, on
               onClick={handleEraseAll}
               className="w-full px-4 py-2.5 text-sm font-medium bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
             >
-              <i className="fa-solid fa-trash mr-2" />
+              <Trash2 className="inline w-4 h-4 mr-2" />
               Erase All Data
             </button>
             {eraseConfirm && (

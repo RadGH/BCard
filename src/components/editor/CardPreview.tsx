@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { Box } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import type { BusinessCardData, CardDesign } from '../../types/card';
 import { renderFront, renderBack, getFrontLayout, getBackLayout, resolveColorPalette } from '../../templates/registry';
@@ -153,7 +154,7 @@ export default function CardPreview({ data, design, showPrintMargins = false }: 
           className="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors"
           title="3D Preview"
         >
-          <i className="fa-solid fa-cube mr-1" />
+          <Box className="inline w-4 h-4 mr-1" />
           Quick View
         </button>
       </div>

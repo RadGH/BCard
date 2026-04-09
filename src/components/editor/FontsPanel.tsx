@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Pencil, Trash2, Plus } from 'lucide-react';
 import type { CardDesign } from '../../types/card';
 import type { FontSet } from '../../hooks/useFontSets';
 import { BUILT_IN_FONT_SETS } from '../../constants/font-pairings';
@@ -37,12 +38,12 @@ function FontSetCard({ set, isActive, onApply, onDelete, onRename }: {
       {isActive && <span className="text-xs text-blue-600 font-medium shrink-0">Active</span>}
       {onRename && (
         <button onClick={onRename} className="p-1 text-slate-400 hover:text-slate-600 rounded shrink-0" title="Rename">
-          <i className="fa-solid fa-pencil text-xs" />
+          <Pencil className="w-3 h-3" />
         </button>
       )}
       {onDelete && (
         <button onClick={onDelete} className="p-1 text-red-400 hover:text-red-600 rounded shrink-0" title="Delete font set">
-          <i className="fa-solid fa-trash text-xs" />
+          <Trash2 className="w-3 h-3" />
         </button>
       )}
     </div>
@@ -174,7 +175,7 @@ export default function FontsPanel({ design, onDesignChange, savedFontSets, onAd
             onClick={() => setShowAddForm(true)}
             className="mt-3 flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg border border-dashed border-blue-300 w-full transition-colors"
           >
-            <i className="fa-solid fa-plus text-xs" /> Save as Font Set
+            <Plus className="w-3 h-3" /> Save as Font Set
           </button>
         )}
       </section>
